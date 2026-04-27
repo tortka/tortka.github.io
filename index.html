@@ -2,162 +2,1335 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="This is the homepage of Tim Ortkamp, a doctoral researcher in the field of outcome model-based radiotherapy optimization, musician, long-distance tour cyclist, and more. On this page, I'm documenting my activities in research, music and travels.">
-    <meta name="author" content="Tim Ortkamp">
-
     <title>Tim Ortkamp — Research || Music || Blog</title>
 
-    <!-- Favicons -->
-    <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-512x512.png">
+    <meta name="description" content="Tim Ortkamp — Researcher in applied mathematics, musician, and traveler. Explore my latest research projects, music releases, and blog posts.">
+    <meta property="og:title" content="Tim Ortkamp — Research || Music || Blog">
+    <meta property="og:description" content="Researcher in applied mathematics, musician, and traveler.">
+    <meta property="og:image" content="img/home-bg.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
     <link href="css/clean-blog.min.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --plain-bright-color: #bcbcbc;
+            --plain-dark-color: #111827;
+            --text-color: #1a1a1a;
+            --bio-color: #4b5563;
+            --accent-color: #111827;
+            --menu-accent-color: #eeeeee;
+            --card-shadow: rgba(0,0,0,0.05);
+            --hr-color: #e5e7eb;
+            --nav-hover-bg: rgba(18, 18, 18, 0.7);
+        }
+
+        body.dark-mode {
+            --bg-color: #121212;
+            --plain-bright-color: #bcbcbc;
+            --plain-dark-color: #bcbcbc;
+            --text-color: #eeeeee;
+            --bio-color: #a0a0a0;
+            --accent-color: #fbbf24;
+            --menu-accent-color: #fbbf24;
+            --card-shadow: rgba(0,0,0,0.5);
+            --hr-color: #2d2d2d;
+            --nav-hover-bg: rgba(18, 18, 18, 0.7);
+        }
+
+        body {
+            background-color: var(--bg-color) !important;
+            color: var(--text-color) !important;
+            font-family: 'Inter', sans-serif !important;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Minimalist Featured Styles */
+        .category-title {
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+            font-size: 0.75em;
+            margin-bottom: 10px;
+            opacity: 0.7;
+        }
+
+        .featured-headline {
+            font-weight: 700;
+            font-size: 1.3em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        /* Gemeinsame Basis für alle Links mit dem Linien-Effekt */
+        .featured-link {
+            text-align: center;
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+            position: relative;
+            text-decoration: none !important;
+            color: var(--text-color) !important;
+            transition: color 0.3s ease;
+            border-bottom: none !important; /* Wichtig: Alten Border entfernen */
+            padding-bottom: 2px;
+            font-size: 0.8em;
+            font-weight: 700;
+        }
+
+        /* Die Linie als Pseudoelement */
+        .featured-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px; /* Die Dicke der Linie */
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent-color);
+            transform: scaleX(0); /* Startzustand: Breite ist 0 */
+            transform-origin: bottom right; /* Zieht sich beim Verlassen nach rechts zusammen */
+            transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1); /* "Saugender" Effekt */
+        }
+
+        /* Der Hover-Zustand */
+        .featured-link:hover::after {
+            transform: scaleX(1); /* Breite schwillt auf 100% an */
+            transform-origin: bottom left; /* Startet das Anschwellen von links */
+        }
+
+        /* Optional: Farbe des Textes beim Hover leicht anpassen */
+        .featured-link:hover {
+            color: var(--accent-color) !important;
+        }
+
+        .featured-text { color: var(--plain-dark-color) !important; line-height: 1.6; font-size: 0.9em; text-align: left;}
+
+        /* Mobile Fix */
+        @media (max-width: 991px) {
+            div[style*="border-right"] {
+                border-right: none !important;
+                border-bottom: 1px solid var(--hr-color);
+                padding-right: 0 !important;
+                padding-bottom: 30px;
+                margin-bottom: 30px;
+            }
+            div[style*="padding-left"] {
+                padding-left: 0 !important;
+            }
+        }
+
+        /* 1. Dynamic Glassmorphism Nav */
+        .navbar-custom {
+            transition: all 0.4s ease !important;
+            background: transparent !important;
+            border-bottom: 1px solid transparent !important;
+            height: 60px !important;
+            position: fixed !important;
+            top: 0 !important;
+            width: 100%;
+            z-index: 9999 !important;
+        }
+
+        .navbar-custom.is-fixed,
+        #mainNav.is-fixed {
+            position: fixed !important; /* Zwingend fixiert bleiben */
+            top: 0 !important;
+            background-color: rgba(18, 18, 18, 0.85) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+        }
+
+        /* --- BRANDING & CURSOR --- */
+        .nav-brand-content {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px;
+            height: 18px; /* Synchron zur Navbar */
+        }
+
+        .nav-portrait {
+            border-radius: 50%;
+            cursor: default !important;
+            pointer-events: none; /* Deaktiviert alle Maus-Aktionen auf dem Bild */
+        }
+
+        .brand-name {
+            font-weight: 700;
+            font-size: 12pt;
+            color: var(--plain-bright-color) !important;
+            white-space: nowrap;
+        }
+
+        /* --- DER ZENTRIER-FIX FÜR DAS ICON --- */
+        .navbar-right-extra-permanent {
+            position: absolute !important;
+            right: 12px !important;
+            top: -2px !important;
+            height: 60px !important; /* Volle Höhe der Bar */
+            display: flex !important;
+            align-items: center !important; /* Vertikale Zentrierung des A-Tags */
+            justify-content: center !important;
+            z-index: 10002 !important;
+        }
+
+        #dark-mode-toggle {
+            width: 42px;
+            height: 42px;
+            display: flex !important;
+            align-items: center !important;    /* Zentriert das Icon vertikal im A-Tag */
+            justify-content: center !important; /* Zentriert das Icon horizontal im A-Tag */
+            border-radius: 8px;
+            cursor: pointer;
+            background: transparent !important;
+            color: var(--plain-bright-color) !important;
+            transition: all 0.3s ease;
+            text-decoration: none !important;
+        }
+
+        #dark-mode-toggle:hover {
+            background-color: transparent !important;
+        }
+
+        #dark-mode-toggle:hover #toggle-icon {
+            color: var(--accent-color) !important; /* Icon wechselt die Farbe */
+            transform: scale(1.2); /* Icon wird dezent größer */
+            text-shadow: 0 0 10px var(--accent-color); /* Optionaler Glow-Effekt */
+        }
+
+        #toggle-icon {
+            font-size: 1.2em;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            line-height: 1 !important; /* Eliminiert FontAwesome-Eigenheiten */
+            margin: 0 !important;
+            transition: all 0.3s ease; /* Macht das Größerwerden und Umfärben geschmeidig */
+        }
+
+        body:not(.dark-mode) #dark-mode-toggle:hover #toggle-icon {
+            color: #3b82f6 !important; /* Ein kräftiges Blau (passend zum Piano im Header) */
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.8));
+        }
+
+        /* --- DARK-MODE SPEZIFIKATION (Sonne leuchtet gelb/orange) --- */
+        /* Wenn body .dark-mode hat, wird das Icon zur Sonne */
+        body.dark-mode #dark-mode-toggle:hover #toggle-icon {
+            color: #fbbf24 !important; /* Ein warmes Sonnengelb */
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.8));
+        }
+
+        /* --- DESKTOP & MOBILE SPACING --- */
+        @media (min-width: 768px) {
+            .navbar-collapse {
+                padding-right: 60px !important;
+                border: none !important;
+            }
+        }
+
+        @media (max-width: 767px) {
+
+            .navbar-custom,
+            .navbar-default,
+            .navbar-header,
+            .navbar-brand,
+            #mainNav {
+                background-color: transparent !important;
+                background-image: none !important; /* Entfernt Bootstraps Standard-Verläufe */
+                background: transparent !important;
+                border-bottom: 1px solid transparent !important;
+            }
+
+            .navbar-header {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                height: 60px;
+                width: 100%;
+            }
+
+            .navbar-nav,
+            .navbar-nav > li,
+            .navbar-nav > li > a {
+                background-color: transparent !important;
+                background: transparent !important;
+            }
+
+            /* Menüliste nach rechts einrücken */
+            .navbar-nav {
+                margin: 0 !important;
+                /* Hier steuern wir den Einzug der gesamten Liste */
+                padding-left: 5px !important;
+                background-color: transparent !important;
+            }
+
+            .navbar-nav > li > a {
+                /* Falls du die Texte innerhalb der Box noch feiner justieren willst */
+                text-align: left;
+                background-color: transparent !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Optionale Trennlinie */
+            }
+
+            /* Entfernt die Linie beim letzten Element */
+            .navbar-nav > li:last-child > a {
+                border-bottom: none;
+            }
+
+            .navbar-custom.is-fixed,
+            #mainNav.is-fixed {
+                background-color: rgba(18, 18, 18, 1.0) !important;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+            }
+
+            .navbar-custom.is-fixed .navbar-collapse {
+                background-color: rgba(18, 18, 18, 0.95) !important;
+                backdrop-filter: blur(12px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            }
+
+            .navbar-right-extra-permanent {
+                position: absolute !important;
+                right: 12px !important;
+                top: 7px !important;
+                height: 60px !important; /* Volle Höhe der Bar */
+                display: flex !important;
+                align-items: center !important; /* Vertikale Zentrierung des A-Tags */
+                justify-content: center !important;
+                z-index: 10002 !important;
+                background: transparent !important;
+            }
+
+            .navbar-brand {
+                position: absolute !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                display: flex !important;
+                align-items: center !important;
+                height: 60px !important;
+                z-index: 10000 !important;
+            }
+
+            .navbar-toggle {
+                position: absolute !important;
+                left: 10px !important;
+                margin: 0 !important;
+                float: none !important;
+                z-index: 10003 !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
+                background: transparent !important; /* Falls Bootstrap hier Grau erzwingt */
+                border: none !important;
+            }
+
+            .navbar-collapse {
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            }
+
+        }
+
+        /* HOVER STYLES */
+        .navbar-custom .nav li a {
+            color: var(--plain-bright-color) !important;
+            transition: all 0.2s ease !important;
+            border-radius: 8px;
+        }
+
+        .navbar-custom .nav li a:hover {
+            color: var(--menu-accent-color) !important;
+            background-color: var(--nav-hover-bg) !important;
+        }
+
+        /* Layout-Zentrum */
+        .main-profile-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px; /* Exakter Abstand zwischen Bio und Boxen */
+            max-width: 1800px;
+            margin: 20px auto 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Die mittlere Inhaltsspalte */
+        .profile-content-center {
+            flex: 0 0 800px; /* Fixiert die Bio auf exakt 800px */
+            width: 800px;
+            max-width: 100%;
+        }
+
+        /* Die Seiten-Boxen */
+        .marginal-column {
+            flex: 1 1 220px; /* Deine gewünschte Breite */
+            max-width: 500px;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 80px; /* Hält die Box 80px unter dem oberen Rand (verhindert Header-Kontakt) */
+            height: auto;
+            z-index: 10;
+
+            /* Styling */
+            padding: 20px 15px;
+            border: 1px solid var(--hr-color);
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(5px);
+            transition: opacity 0.6s ease;
+        }
+
+        /* Animationen & Sichtbarkeit */
+        .marginal-column.reveal {
+            opacity: 0;
+            transform: none !important; /* Deaktiviert das Hochrutschen von Reveal für Sticky-Elemente */
+        }
+
+        .marginal-column.active {
+            opacity: 0.6;
+        }
+
+        /* Mobile Optimierung */
+        @media (max-width: 1400px) {
+            .marginal-column { display: none !important; }
+            .main-profile-wrapper { display: block; }
+            .profile-content-center { margin: 20px 0; width: 100%; }
+        }
+
+        /* SYMMETRIE-LOGIK: Exakt gleicher Abstand links & rechts jeder Box */
+        @media (min-width: 1100px) {
+            .marginal-column {
+                opacity: 0.6;
+            }
+        }
+
+        /* Akzentuierung der Titel innerhalb des Rahmens */
+        .marginal-title {
+            text-align: center;
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--accent-color);
+            display: block;
+            width: 100%;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            opacity: 0.7; /* Titel im Rahmen klarer lesbar */
+        }
+
+        .marginal-text {
+            text-align: left;
+            flex-grow: 1;
+            font-size: 0.85em;
+            line-height: 1.4;
+            color: var(--bio-color);
+            margin-bottom: 15px;
+            word-wrap: break-word;
+        }
+
+        /* Gemeinsame Basis für alle Links mit dem Linien-Effekt */
+        .marginal-link {
+            text-align: center;
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+            position: relative;
+            text-decoration: none !important;
+            color: var(--text-color) !important;
+            transition: color 0.3s ease;
+            border-bottom: none !important; /* Wichtig: Alten Border entfernen */
+            padding-bottom: 2px;
+            font-size: 0.8em;
+            font-weight: 700;
+        }
+
+        /* Die Linie als Pseudoelement */
+        .marginal-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px; /* Die Dicke der Linie */
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent-color);
+            transform: scaleX(0); /* Startzustand: Breite ist 0 */
+            transform-origin: bottom right; /* Zieht sich beim Verlassen nach rechts zusammen */
+            transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1); /* "Saugender" Effekt */
+        }
+
+        /* Der Hover-Zustand */
+        .marginal-link:hover::after {
+            transform: scaleX(1); /* Breite schwillt auf 100% an */
+            transform-origin: bottom left; /* Startet das Anschwellen von links */
+        }
+
+        /* Optional: Farbe des Textes beim Hover leicht anpassen */
+        .marginal-link:hover {
+            color: var(--accent-color) !important;
+        }
+
+        /* WICHTIG: Mobile Ansicht */
+        @media (max-width: 1400px) {
+            /* Wenn der Bildschirm nicht breit genug ist, um Text neben dem Container zu haben */
+            .marginal-column {
+                display: none !important;
+            }
+        }
+
+        /* Styling für die CV-Einträge innerhalb der Marginal-Box */
+        .cv-item {
+            margin-bottom: 12px; /* Abstand zwischen den Stationen */
+            line-height: 1.2;    /* Etwas engerer Zeilenabstand für Kompaktheit */
+            text-align: left;
+        }
+
+        .cv-date {
+            display: block;
+            font-size: 0.75em;   /* Jahreszahlen etwas kleiner */
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--accent-color); /* Akzentfarbe für die Zeitlinie */
+            margin-bottom: 2px;
+            opacity: 0.8;
+        }
+
+        .cv-item strong {
+            font-size: 0.9em;
+            display: block;      /* Rolle steht in eigener Zeile */
+            color: var(--text-color);
+        }
+
+        /* Optional: Ein ganz feiner Trenner zwischen den Items */
+        .cv-item:not(:last-child) {
+            border-bottom: 1px solid var(--hr-color);
+            padding-bottom: 10px;
+        }
+
+        /* --- 1. KACHEL BASIS (DIE BÜHNE) --- */
+        .grid-card {
+            position: relative;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none; /* Stellt sicher, dass kein Rahmen existiert */
+        }
+
+        /* Zoom-Effekt beim Hover über die Karte */
+        .grid-card:hover {
+            transform: scale(1.03);
+        }
+
+        /* --- 2. OVERLAY (ABDUNKLUNG & AUSRICHTUNG) --- */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.35); /* Standard-Schleier */
+            display: flex;
+            align-items: flex-end;    /* Button nach unten */
+            justify-content: flex-start; /* Button nach links */
+            padding: 25px;            /* Abstand vom Kachelrand */
+            transition: background 0.3s ease;
+        }
+
+        /* Schleier wird etwas heller, wenn man die Kachel berührt */
+        .grid-card:hover .grid-overlay {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- 3. DER BUTTON (STANDARD / BRIGHT-MODE) --- */
+        .grid-link {
+            display: inline-block;
+            padding: 10px 20px;
+
+            /* Bright-Mode: Weißer Hintergrund, schwarze Schrift */
+            background-color: #eeeeee !important;
+            color: #111111 !important;
+
+            text-decoration: none !important;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            letter-spacing: 1px;
+
+            /* Rahmen explizit entfernen */
+            border: none !important;
+            outline: none !important;
+
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        /* Button-Hover im Bright-Mode */
+        .grid-link:hover {
+            transform: translateY(-2px);
+            background-color: #f9fafb !important; /* Minimales Grau beim direkten Hover */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        /* --- 4. DARK-MODE ANPASSUNGEN --- */
+        /* Greift, wenn der Body die Klasse .dark-mode hat */
+        body.dark-mode .grid-link {
+            background-color: var(--accent-color, #fbbf24) !important; /* Dein Gelb */
+            color: #111111 !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Button-Hover im Dark-Mode */
+        body.dark-mode .grid-link:hover {
+            background-color: var(--accent-color, #fbbf24) !important;
+            filter: brightness(1.15); /* Wird etwas leuchtender statt weiß zu werden */
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Overlay im Dark-Mode (optional etwas dunkler für mehr Kontrast) */
+        body.dark-mode .grid-overlay {
+            background: rgba(0, 0, 0, 0.45);
+        }
+
+        /* 2. Back to Top Button */
+        #back-to-top {
+            position: fixed; bottom: 30px; right: 30px; z-index: 1000;
+            width: 45px; height: 45px; background: var(--accent-color); color: var(--bg-color);
+            border: none; border-radius: 50%; cursor: pointer; display: none;
+            align-items: center; justify-content: center; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        #back-to-top:hover { transform: scale(1.1); opacity: 0.9; }
+
+        /* Mobile Nav Fix */
+        @media (max-width: 767px) {
+            .navbar-custom { background-color: #1a1a1a !important; }
+            #dark-mode-toggle { display: block !important; text-align: left; }
+            .profile-section { flex-direction: column; text-align: center; gap: 20px; margin-bottom: 5px !important; }
+        }
+
+        /* Profil & Bio */
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 0px !important; /* 'auto' zentriert die Sektion */
+            padding: 0 20px;
+            max-width: 800px;  /* Limitierung für früher Platz an den Rändern */
+            transition: all 0.3s ease;
+        }
+
+        .profile-img { max-width: 250px; border-radius: 16px; box-shadow: 0 10px 25px var(--card-shadow); }
+        .profile-img {
+            transition: transform 0.5s ease;
+        }
+        .profile-greeting { font-size: 30pt; color: var(--accent-color) !important; font-weight: 800; display: block; margin-bottom: 10px; }
+        .profile-bio { color: var(--plain-dark-color) !important; line-height: 1.6; font-size: 1.1em; text-align: left; margin-bottom: 0px; }
+
+        /* 1. Die Farb-Variablen (müssen ganz oben stehen) */
+        .link-linkedin { --icon-color: #0077b5; }
+        .link-github { --icon-color: #6e5494; }
+        .link-orcid { --icon-color: #A6CE39; }
+        .link-researchgate { --icon-color: #00ccbb; }
+        .link-scholar { --icon-color: #4285F4; }
+        .link-soundcloud { --icon-color: #ff5500; }
+
+        /* 2. Der Wrapper */
+        .tooltip-wrapper {
+            position: relative !important;
+            display: inline-block !important;
+            overflow: visible !important; /* Ganz wichtig: Darf nicht hidden sein! */
+        }
+
+        /* 3. Die Tooltip-Blase */
+        .tooltip-wrapper::after {
+            content: attr(data-tooltip) !important;
+            position: absolute !important;
+            bottom: 110% !important; /* Etwas höher schieben */
+            left: 50% !important;
+            transform: translateX(-50%) translateY(10px) !important;
+
+            /* Farben direkt über die Variable */
+            background-color: var(--icon-color, #60a5fa) !important;
+            color: #eeeeee !important;
+
+            padding: 6px 12px !important;
+            border-radius: 6px !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+            white-space: nowrap !important;
+
+            /* Sichtbarkeit erzwingen */
+            display: block !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            z-index: 99999 !important;
+
+            transition: opacity 0.25s ease, transform 0.25s ease !important;
+            pointer-events: none !important;
+        }
+
+        /* 4. Der Pfeil */
+        .tooltip-wrapper::before {
+            content: '' !important;
+            position: absolute !important;
+            bottom: 115% !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            border-width: 8px !important;
+            border-style: solid !important;
+            border-color: var(--icon-color, #60a5fa) transparent transparent transparent !important;
+
+            display: block !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            z-index: 99999 !important;
+            transition: opacity 0.5s ease !important;
+            pointer-events: none !important;
+        }
+
+        /* 5. HOVER-EFFEKT (Stärkerer Selektor) */
+        .tooltip-wrapper:hover::after {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateX(-50%) translateY(0) !important;
+        }
+
+        .tooltip-wrapper:hover::before {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        /* 6. ICON FARBE BEIM HOVER */
+        .tooltip-wrapper:hover .fa-circle {
+            color: var(--icon-color) !important;
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            /* Transition für beide Richtungen (In und Out) */
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        }
+
+        .reveal .row {
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fa-moon-o { color: #60a5fa !important; }
+        .fa-sun-o { color: #fbbf24 !important; }
+
+    </style>
 
 </head>
 
-<body>
+<body class="dark-mode">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">
-                    <div>
-                    	<img src="img/small-portrait.jpeg" alt="Small portrait of Tim Ortkamp" style="border-radius: 50%; cursor: pointer; border: none; margin-right: 5px" width="30">
-                        Tim Ortkamp
-                    </div>
-                </a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="research.html">Research</a>
-                    </li>
-                    <li>
-                        <a href="music.html">Music</a>
-                    </li>
-                    <li>
-                        <a href="blog/blog-head.html">Blog</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+  <nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="mainNav">
+    <div class="container-fluid">
+        <div class="navbar-right-extra-permanent">
+            <a id="dark-mode-toggle" title="Dark/Light Mode">
+                <i id="toggle-icon" class="fa fa-moon-o"></i>
+            </a>
         </div>
-        <!-- /.container -->
-    </nav>
 
-    <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('img/home-bg.png')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="site-heading">
-                        <h1>Welcome</h1>
-                        <hr class="small">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle</span>
+                <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">
+                <div class="nav-brand-content">
+                    <img src="img/portrait.jpg" alt="Portrait" class="nav-portrait" width="20">
+                    <span class="brand-name">Tim Ortkamp</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="research.html">Research</a></li>
+                <li><a href="music.html">Music</a></li>
+                <li><a href="blog/blog-head.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <header class="intro-header" style="height: 250px; margin-bottom: 0 !important; ">
+      <div id="hero-container" style="position: relative; width: 100%; height: 250px; overflow: hidden;">
+          <canvas id="interactionCanvas"></canvas>
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none;">
+              <p style="color: var(--accent-color); font-size: 0.9em; letter-spacing: 2px;"></p>
+          </div>
+      </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="main-profile-wrapper">
+
+            <div class="marginal-column left-side reveal" id="left-box">
+                <div class="marginal-content">
+                    <h5 class="marginal-title">Short CV</h5>
+                    <div class="marginal-text">
+                        Education & Professional Career<br><br>
+                        <div class="cv-item">
+                            <span class="cv-date">2021–2026</span>
+                            <strong>PhD Mathematics</strong><br>
+                            <span style="font-size: 10pt; ">
+                              Karlsruhe Institute of Technology & German Cancer Research Center
+                            </span>
+                        </div>
+                        <div class="cv-item">
+                            <span class="cv-date">2018–2021</span>
+                            <strong>M.Sc. Industrial Engineering</strong><br>
+                            <span style="font-size: 10pt; ">
+                              Karlsruhe Institute of Technology
+                            </span>
+                        </div>
+                        <div class="cv-item">
+                            <span class="cv-date">2014–2018</span>
+                            <strong>B.Sc. Industrial Engineering</strong><br>
+                            <span style="font-size: 10pt; ">
+                              Karlsruhe Institute of Technology
+                            </span>
+                        </div>
+                        <div class="cv-item">
+                            <span class="cv-date">2006–2014</span>
+                            <strong>Abitur</strong><br>
+                            <span style="font-size: 10pt; ">
+                              Viktoriaschule Darmstadt
+                            </span>
+                        </div>
+                        Other Highlights<br><br>
+                        <div class="cv-item">
+                            <ul>
+                              <li style="font-size: 9pt; margin-bottom: 5px; ">Visiting Researcher at Massachusetts General Hospital (4 months)</li>
+                              <li style="font-size: 9pt; margin-bottom: 5px; ">7 thesis supervisions</li>
+                              <li style="font-size: 9pt; margin-bottom: 5px; ">6 international conference talks</li>
+                              <li style="font-size: 9pt; margin-bottom: 5px; ">4 teaching activities as tutor/instructor/lecturer</li>
+                              <li style="font-size: 9pt; margin-bottom: 5px; ">3 open-source software contributions</li>
+                              <li style="font-size: 9pt; margin-bottom: 5px; ">2 industry internships (9 months)</li>
+                              <li style="font-size: 9pt; margin-bottom: 5px; ">2 student jobs (4.5 years)</li>
+                              <li style="font-size: 9pt; ">1 certificate for good teaching</li>
+                            </ul>
+                        </div>
+                        <div class="cv-item">
+                        </div>
+                    </div>
+                    <a href="cv.pdf" target="_blank" class="marginal-link">Full CV (PDF) →</a>
+                </div>
+            </div>
+
+            <div class="profile-content-center">
+
+                <section class="profile-section reveal">
+                    <div class="profile-image-container">
+                        <img src="img/portrait.jpg" alt="Tim Ortkamp" class="profile-img">
+                    </div>
+                    <div class="profile-text">
+                        <span class="profile-greeting">Hi, I'm Tim.</span>
+                        <p class="profile-bio">I'm a <strong>researcher</strong> in applied mathematics, a <strong>musician</strong>, and a <strong>traveler</strong>.</p>
+                    </div>
+                </section>
+
+                <div class="reveal" style="margin: 0;">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <hr style="border-top: 1px solid var(--hr-color); margin-bottom: 20px 0; opacity: 1;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6" style="padding-right: 30px;">
+                            <h6 class="category-title">Latest Research</h6>
+                            <h3 class="featured-headline">Direct optimization of the probability of lesion origin in proton treatment planning for low-grade glioma patients</h3>
+                            <p class="featured-text">Joint research at the Karlsruhe Institute of Technology (KIT), German Cancer Research Center (DKFZ) and Heidelberg Ion Therapy Center (HIT) on the direct integration of a voxel-based toxicity model into proton treatment plan optimization for low-grade glioma patients.</p>
+                            <a href="https://aapm.onlinelibrary.wiley.com/doi/10.1002/mp.70395" target="_blank" class="featured-link">Read publication →</a>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <hr style="border-top: 1px solid var(--hr-color); margin-top: 20px 0; opacity: 1;">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" style="padding-left: 30px;">
+                            <h6 class="category-title">Latest Record</h6>
+                            <h3 class="featured-headline">KODA - Transition & Transience (EP, 2016)</h3>
+                            <p class="featured-text"><em>"How fleeting, how futile is a childhood dream flying away from home?"</em><br> An EP from my former indie-pop/psychedelic band <strong>KODA</strong>. Featuring 5 original tracks, recorded in our rehearsal room and mixed by myself.</p>
+                            <a href="https://soundcloud.com/kodamusic/sets/transition-transience" target="_blank" class="featured-link">Listen on SoundCloud →</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <hr style="border-top: 1px solid var(--hr-color); margin-top: 20px 0; opacity: 1;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 reveal">
+                        <div class="grid-card" style="background-image: url('img/research-bg.jpeg');">
+                            <div class="grid-overlay">
+                                <a href="./research.html" class="grid-link">Explore Research →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 reveal">
+                        <div class="grid-card" style="background-image: url('img/music-bg.jpg');">
+                            <div class="grid-overlay">
+                                <a href="./music.html" class="grid-link">Listen to Music →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 reveal">
+                        <div class="grid-card" style="background-image: url('img/blog-bg.jpg');">
+                            <div class="grid-overlay">
+                                <a href="blog/blog-head.html" class="grid-link">Read the Blog →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 reveal">
+                        <div class="grid-card" style="background-image: url('img/contact-bg.jpg');">
+                            <div class="grid-overlay">
+                                <a href="contact.html" class="grid-link">Get in Touch →</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-    	        <div>
-  		    <img src="img/portrait.jpg" alt="Portrait of Tim Ortkamp" height="220px" style="float: left; margin-right: 20px; margin-bottom: 20px;">
-  		    <p>Hi, I'm Tim. And I'm a researcher. A musician. A traveler who enjoys long-distance cycling tours as much as after-work runs.<br><br>My <a href="research.html">research</a> focuses on embedding outcome prediction models into radiotherapy optimization, especially machine learning models. I'm developing <a target="_blank" href="https://github.com/pyanno4rt/pyanno4rt"><i class="fa fa-github"></i> pyanno4rt</a>, an open-source Python package for radiotherapy treatment plan optimization.<br><br>Besides, I walk an eventful path in <a href="music.html">music</a> as a songwriter, instrumentalist and producer. Cycling tours of several hundred kilometers and thousands of meters uphill have become one of my favorite vacation activities.<br><br>This page also features a <a href="blog/blog-head.html">blog</a>, which I'll feed with my latest news. Stay tuned!</p>
-		</div>
-
+            <div class="marginal-column right-side reveal" id="right-box">
+                <div class="marginal-content">
+                    <h5 class="marginal-title">Current Setup</h5>
+                    <p class="marginal-text">Ableton Live + Analog Hardware</p>
+                    <a href="contact.html" class="marginal-link">Get in touch →</a>
+                </div>
             </div>
+
         </div>
     </div>
 
+    <button id="back-to-top" title="Go to top"><i class="fa fa-chevron-up"></i></button>
+
     <hr>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <ul class="list-inline text-center">
-                        <li>
-                            <a target="_blank" href="https://github.com/tortka">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a target="_blank" href="https://www.linkedin.com/in/tim-ortkamp">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a target="_blank" href="https://soundcloud.com/timnoelofficial">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-soundcloud fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <p class="copyright text-muted">Copyright &copy; Tim Ortkamp 2025</p>
-                </div>
-            </div>
+    <footer style="padding: 20px 0;">
+        <div class="container text-center">
+            <ul class="list-inline">
+                <li>
+                    <a target="_blank" href="https://www.linkedin.com/in/tim-ortkamp"
+                       class="link-linkedin tooltip-wrapper"
+                       data-tooltip="LinkedIn">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a target="_blank" href="https://github.com/tortka"
+                       class="link-github tooltip-wrapper"
+                       data-tooltip="GitHub">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a target="_blank" href="https://orcid.org/0009-0005-6603-3088"
+                       class="link-orcid tooltip-wrapper"
+                       data-tooltip="ORCID">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-graduation-cap fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a target="_blank" href="https://www.researchgate.net/profile/Tim-Ortkamp"
+                       class="link-researchgate tooltip-wrapper"
+                       data-tooltip="ResearchGate">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <strong class="fa-stack-1x fa-inverse" style="font-family: sans-serif;">R</strong>
+                        </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a target="_blank" href="https://scholar.google.com/citations?user=KL0HYkgAAAAJ&hl=de"
+                       class="link-scholar tooltip-wrapper"
+                       data-tooltip="Google Scholar">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-google fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a target="_blank" href="https://soundcloud.com/timnoelofficial"
+                       class="link-soundcloud tooltip-wrapper"
+                       data-tooltip="SoundCloud">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-soundcloud fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <p class="copyright text-muted" style="margin-top: 15px;">Copyright &copy; Tim Ortkamp 2026</p>
         </div>
     </footer>
 
-    <!-- jQuery -->
     <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('dark-mode-toggle');
+            const icon = document.getElementById('toggle-icon');
+            const body = document.body;
+            const nav = document.getElementById('mainNav');
+            const btt = document.getElementById('back-to-top');
 
-    <!-- Custom Theme JavaScript -->
-    <script src="js/clean-blog.min.js"></script>
+            // Dark Mode Logic
+            function updateUI(isDark) {
+                if (isDark) { body.classList.add('dark-mode'); icon.className = 'fa fa-sun-o'; }
+                else { body.classList.remove('dark-mode'); icon.className = 'fa fa-moon-o'; }
+            }
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') updateUI(true);
+            toggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const isNowDark = !body.classList.contains('dark-mode');
+                updateUI(isNowDark);
+                localStorage.setItem('theme', isNowDark ? 'light' : 'dark');
+            });
 
+            // Scroll Logic (Nav Blur & Back to Top)
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('is-fixed');
+                } else {
+                    nav.classList.remove('is-fixed');
+                }
+
+                if (window.scrollY > 300) {
+                    btt.style.display = "flex";
+                } else {
+                    btt.style.display = "none";
+                }
+            });
+
+            btt.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Reveal Animation
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        // Element kommt ins Bild -> Fade-In
+                        entry.target.classList.add('active');
+                    } else {
+                        // Element verlässt das Bild -> Fade-Out (DAS HIER HINZUFÜGEN)
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, { threshold: 0.1 }); // Reagiert, sobald 10% des Bildes sichtbar sind
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+    <script>
+        (function() {
+            const canvas = document.getElementById('interactionCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .intro-header, #hero-container { height: 250px !important; margin: 0 !important; padding: 0 !important; }
+                #interactionCanvas { display: block; width: 100%; height: 250px; background: #000; vertical-align: bottom; cursor: pointer; }
+            `;
+            document.head.appendChild(style);
+
+            const config = {
+                getTargetCount: () => {
+                    const w = window.innerWidth;
+                    if (w < 480) return 40;
+                    if (w < 768) return 80;
+                    if (w < 1024) return 120;
+                    return 160;
+                },
+                boxColors: ['#f87171', '#fbbf24', '#3b82f6', '#4ade80'],
+                morphSpeed: 0.05,
+                chaosSpeed: 0.05,
+                yShift: 28,
+                sizeBalance: [1.2, 1.0, 1.0, 1.2],
+                glowStrength: 15,
+                jitterStrength: 2.0,
+                linkDist: 60,
+                linkAlpha: 0.6,
+                hoverDelay: 1000,
+                hoverOutDelay: 2000,
+                releaseTimeout: 2000
+            };
+
+            let fields = [];
+            const mouse = { hoverId: null, pendingId: null, lockedId: null, hoverTimer: null, hoverOutTimer: null, releaseTimer: null };
+
+            // Zentrale Funktion um Timer-Konflikte zu lösen
+            function clearAllTimers() {
+                clearTimeout(mouse.hoverTimer);
+                clearTimeout(mouse.hoverOutTimer);
+                clearTimeout(mouse.releaseTimer);
+                mouse.hoverTimer = null;
+                mouse.hoverOutTimer = null;
+                mouse.releaseTimer = null;
+            }
+
+            function getShapeForField(fieldId, count, boxW, boxH) {
+                let points = [];
+                for(let i=0; i<count; i++) {
+                    let t = i / count;
+                    if (fieldId === 0) { // GUITAR
+                        if(t < 0.3) points.push({x: 0, y: -70 + t * 250});
+                        else { let a = (t-0.3)*Math.PI*2; let r = 40*(1+0.4*Math.abs(Math.sin(a))); points.push({x: Math.cos(a)*r, y: 25+Math.sin(a)*50}); }
+                    } else if (fieldId === 1) { // PIANO
+                        if(t < 0.3) points.push({x: -45 + t*300, y: 35});
+                        else { let a = (t-0.3)*Math.PI; points.push({x: 50 - Math.pow(a/Math.PI, 0.6)*100, y: 35 - Math.sin(a) * 75}); }
+                    } else if (fieldId === 2) { // DRUMS
+                        if(t < 0.5) { let a = (t*2)*Math.PI*2; points.push({x: Math.cos(a)*40, y: 30 + Math.sin(a)*35}); }
+                        else { let side = i % 2 === 0 ? -1 : 1; points.push({x: side * 50 + (Math.random()-0.5)*20, y: -25}); }
+                    } else { // MIC
+                        if(t < 0.5) { let a = (t*2)*Math.PI*2; points.push({x: Math.cos(a)*20, y: -35 + Math.sin(a)*30}); }
+                        else points.push({x: (Math.random()-0.5)*5, y: -5 + (t-0.5)*110});
+                    }
+                }
+                let minY = Math.min(...points.map(p => p.y)), maxY = Math.max(...points.map(p => p.y));
+                let minX = Math.min(...points.map(p => p.x)), maxX = Math.max(...points.map(p => p.x));
+                let scale = (130 / (maxY - minY)) * config.sizeBalance[fieldId];
+                let centerX = (minX + maxX) / 2, centerY = (minY + maxY) / 2;
+                return points.map(p => ({ x: (p.x - centerX) * scale, y: (p.y - centerY) * scale }));
+            }
+
+            class Particle {
+                constructor(field, index, startInForm = false) {
+                    this.field = field; this.index = index;
+                    const target = this.field.shape[this.index] || {x: 0, y: 0};
+                    if(startInForm) {
+                        this.x = this.field.x + this.field.w/2 + target.x;
+                        this.y = 125 + target.y + config.yShift;
+                    } else {
+                        this.x = Math.random() * field.w + field.x;
+                        this.y = Math.random() * 250;
+                    }
+                    this.vx = (Math.random()-0.5)*2; this.vy = (Math.random()-0.5)*2;
+                    this.size = Math.random()*1.5 + 1.2;
+                }
+                update() {
+                    const isActive = (mouse.hoverId === this.field.id || mouse.lockedId === this.field.id);
+                    if (isActive) {
+                        const target = this.field.shape[this.index];
+                        if(!target) return;
+                        const jX = (Math.random() - 0.5) * config.jitterStrength;
+                        const jY = (Math.random() - 0.5) * config.jitterStrength;
+                        const tx = this.field.x + this.field.w/2 + target.x + jX;
+                        const ty = 125 + target.y + config.yShift + jY;
+                        this.vx = (tx - this.x) * config.morphSpeed + jX * 0.5;
+                        this.vy = (ty - this.y) * config.morphSpeed + jY * 0.5;
+                        this.x += this.vx; this.y += this.vy;
+                    } else {
+                        this.vx += (Math.random()-0.5) * config.chaosSpeed;
+                        this.vy += (Math.random()-0.5) * config.chaosSpeed;
+                        this.x += this.vx; this.y += this.vy;
+                        this.vx *= 0.98; this.vy *= 0.98;
+                    }
+                    const p = 5;
+                    if (this.x < this.field.x + p) { this.x = this.field.x + p; this.vx *= -1; }
+                    else if (this.x > this.field.x + this.field.w - p) { this.x = this.field.x + this.field.w - p; this.vx *= -1; }
+                    if (this.y < p) { this.y = p; this.vy *= -1; }
+                    else if (this.y > 245) { this.y = 245; this.vy *= -1; }
+                }
+                draw(color, active) {
+                    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    if (active) {
+                        ctx.globalAlpha = 1.0;
+                        ctx.shadowBlur = config.glowStrength * dpr; ctx.shadowColor = color;
+                    } else {
+                        ctx.globalAlpha = 0.75; ctx.shadowBlur = 0;
+                    }
+                    ctx.fillStyle = color; ctx.fill(); ctx.shadowBlur = 0;
+                }
+            }
+
+            function initFields() {
+                const oldWidth = canvas.width / dpr || window.innerWidth;
+                const logicalWidth = window.innerWidth;
+                const logicalHeight = 250;
+                canvas.width = logicalWidth * dpr;
+                canvas.height = logicalHeight * dpr;
+                ctx.setTransform(1, 0, 0, 1, 0, 0);
+                ctx.scale(dpr, dpr);
+                const cellW = logicalWidth / 4;
+                const oldCellW = oldWidth / 4;
+                const targetCount = config.getTargetCount();
+                for (let i = 0; i < 4; i++) {
+                    if (fields[i]) {
+                        const ratio = cellW / oldCellW;
+                        fields[i].particles.forEach(p => { p.x = (i * cellW) + ((p.x - fields[i].x) * ratio); });
+                        fields[i].x = i * cellW; fields[i].w = cellW;
+                        fields[i].shape = getShapeForField(i, targetCount, cellW, 250);
+                        let currentParticles = fields[i].particles;
+                        if (currentParticles.length < targetCount) {
+                            for (let j = currentParticles.length; j < targetCount; j++) {
+                                currentParticles.push(new Particle(fields[i], j, false));
+                            }
+                        } else if (currentParticles.length > targetCount) {
+                            currentParticles.length = targetCount;
+                        }
+                    } else {
+                        let f = { id: i, x: i * cellW, y: 0, w: cellW, h: 250, particles: [] };
+                        f.shape = getShapeForField(i, targetCount, f.w, f.h);
+                        for (let j = 0; j < targetCount; j++) f.particles.push(new Particle(f, j, true));
+                        fields.push(f);
+                    }
+                }
+            }
+
+            function drawFieldLinks(field) {
+                const particles = field.particles;
+                const maxDistSq = config.linkDist * config.linkDist;
+                ctx.lineWidth = 1.0; ctx.strokeStyle = config.boxColors[field.id];
+                for (let i = 0; i < particles.length; i++) {
+                    const p1 = particles[i];
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const dx = p1.x - p2.x, dy = p1.y - p2.y;
+                        const d2 = dx * dx + dy * dy;
+                        if (d2 < maxDistSq) {
+                            ctx.globalAlpha = config.linkAlpha * (1 - Math.sqrt(d2) / config.linkDist);
+                            ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const mx = e.clientX - rect.left;
+                let currentId = null;
+                for (let i = 0; i < 4; i++) { if (mx > fields[i].x && mx < fields[i].x + fields[i].w) { currentId = i; break; } }
+
+                if (currentId !== null) {
+                    if (mouse.pendingId !== currentId) {
+                        clearAllTimers();
+                        mouse.pendingId = currentId;
+                        mouse.hoverTimer = setTimeout(() => { mouse.hoverId = mouse.pendingId; }, config.hoverDelay);
+                    }
+                } else {
+                    // Aus einer Box rausbewegen
+                    if (mouse.pendingId !== null || mouse.hoverId !== null) {
+                        clearTimeout(mouse.hoverTimer);
+                        mouse.pendingId = null;
+                        if (mouse.hoverId !== null && !mouse.hoverOutTimer) {
+                            mouse.hoverOutTimer = setTimeout(() => {
+                                mouse.hoverId = null;
+                                mouse.hoverOutTimer = null;
+                            }, config.hoverOutDelay);
+                        }
+                    }
+                }
+            });
+
+            canvas.addEventListener('mousedown', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const mx = e.clientX - rect.left;
+                clearAllTimers(); // Sofort alle Verzögerungen stoppen
+                for (let i = 0; i < 4; i++) {
+                    if (mx > fields[i].x && mx < fields[i].x + fields[i].w) {
+                        mouse.lockedId = i;
+                        break;
+                    }
+                }
+            });
+
+            window.addEventListener('mouseup', () => {
+                if (mouse.lockedId !== null) {
+                    clearTimeout(mouse.releaseTimer);
+                    mouse.releaseTimer = setTimeout(() => {
+                        mouse.lockedId = null;
+                    }, config.releaseTimeout);
+                }
+            });
+
+            canvas.addEventListener('mouseleave', () => {
+                if (mouse.hoverId !== null && !mouse.hoverOutTimer) {
+                    mouse.hoverOutTimer = setTimeout(() => {
+                        mouse.hoverId = null;
+                        mouse.hoverOutTimer = null;
+                    }, config.hoverOutDelay);
+                }
+                mouse.pendingId = null;
+            });
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+                for (let i = 0; i < 4; i++) {
+                    const f = fields[i];
+                    const active = (mouse.hoverId === f.id || mouse.lockedId === f.id);
+                    drawFieldLinks(f);
+                    f.particles.forEach(p => { p.update(); p.draw(config.boxColors[f.id], active); });
+                }
+                requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', initFields);
+            initFields(); animate();
+        })();
+    </script>
 </body>
-
 </html>
