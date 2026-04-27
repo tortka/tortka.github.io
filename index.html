@@ -73,6 +73,35 @@
             margin-bottom: 15px;
         }
 
+        /* Standard für alle Geräte (Mobile First) */
+        .featured-column {
+            padding-left: 15px;   /* Standard-Bootstrap-Padding oder dein Wunschwert */
+            padding-right: 15px;
+            margin-bottom: 30px;  /* Abstand zwischen den Elementen */
+        }
+
+        /* Letztes Element braucht keinen Abstand nach unten (deine vorherige Frage) */
+        .featured-column:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Erst ab Desktop-Breite den seitlichen Versatz einbauen */
+        @media (min-width: 992px) {
+            .featured-column {
+                margin-bottom: 0; /* Nebeneinander kein Abstand nach unten nötig */
+            }
+
+            .featured-left {
+                padding-right: 30px; /* Schiebt Text weg vom rechten Nachbarn */
+                padding-left: 15px;
+            }
+
+            .featured-right {
+                padding-left: 30px;  /* Schiebt Text weg vom linken Nachbarn */
+                padding-right: 15px;
+            }
+        }
+
         /* Gemeinsame Basis für alle Links mit dem Linien-Effekt */
         .featured-link {
             text-align: center;
@@ -378,6 +407,31 @@
             max-width: 100%;
         }
 
+        /* Standard für Mobile: Abstand nach unten */
+        .profile-content-center .col-md-6,
+        .profile-content-center .col-sm-6 {
+            margin-bottom: 50px;
+        }
+
+        /* Die LETZTE Spalte in der Reihe bekommt auf Mobile KEINEN Abstand nach unten */
+        .profile-content-center .col-md-6:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Ab Desktop (md >= 992px): Abstand unten entfernen */
+        @media (min-width: 992px) {
+            .profile-content-center .col-md-6 {
+                margin-bottom: 0;
+            }
+        }
+
+        /* Ab Tablet (sm >= 768px): Abstand für die 4er-Grid-Karten entfernen */
+        @media (min-width: 768px) {
+            .profile-content-center .col-sm-6 {
+                margin-bottom: 0;
+            }
+        }
+
         /* Die Seiten-Boxen */
         .marginal-column {
             flex: 1 1 220px; /* Deine gewünschte Breite */
@@ -524,6 +578,32 @@
             border-bottom: 1px solid var(--hr-color);
             padding-bottom: 10px;
         }
+
+        /* Kleinere Abstände für die Grid-Karten auf Mobile */
+.grid-row .col-sm-6 {
+    margin-bottom: 20px; /* Dein kleinerer Wunschwert */
+    padding-left: 10px;  /* Falls auch der seitliche Abstand kleiner sein soll */
+    padding-right: 10px;
+}
+
+/* Den Abstand der untersten Reihe entfernen */
+.grid-row .reveal:last-child .grid-card,
+.grid-row .reveal:nth-last-child(2) .grid-card {
+    margin-bottom: 0;
+}
+
+/* Ab Tablet/Desktop: Abstände nach unten komplett entfernen,
+   da sie dort nebeneinander stehen */
+@media (min-width: 768px) {
+    .grid-row .col-sm-6 {
+        margin-bottom: 0;
+    }
+
+    /* Falls die Karten oben zu nah an der HR-Linie kleben: */
+    .grid-row {
+        margin-top: 20px;
+    }
+}
 
         /* --- 1. KACHEL BASIS (DIE BÜHNE) --- */
         .grid-card {
@@ -761,7 +841,7 @@
   <nav class="navbar navbar-default navbar-custom navbar-fixed-top" id="mainNav">
     <div class="container-fluid">
         <div class="navbar-right-extra-permanent">
-            <a id="dark-mode-toggle" title="Dark/Light Mode">
+            <a id="dark-mode-toggle">
                 <i id="toggle-icon" class="fa fa-moon-o"></i>
             </a>
         </div>
@@ -875,20 +955,14 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6" style="padding-right: 30px;">
+                        <div class="col-md-6 featured-column featured-left">
                             <h6 class="category-title">Latest Research</h6>
                             <h3 class="featured-headline">Direct optimization of the probability of lesion origin in proton treatment planning for low-grade glioma patients</h3>
                             <p class="featured-text">Joint research at the Karlsruhe Institute of Technology (KIT), German Cancer Research Center (DKFZ) and Heidelberg Ion Therapy Center (HIT) on the direct integration of a voxel-based toxicity model into proton treatment plan optimization for low-grade glioma patients.</p>
                             <a href="https://aapm.onlinelibrary.wiley.com/doi/10.1002/mp.70395" target="_blank" class="featured-link">Read publication →</a>
                         </div>
 
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <hr style="border-top: 1px solid var(--hr-color); margin-top: 20px 0; opacity: 1;">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6" style="padding-left: 30px;">
+                        <div class="col-md-6 featured-column featured-right">
                             <h6 class="category-title">Latest Record</h6>
                             <h3 class="featured-headline">KODA - Transition & Transience (EP, 2016)</h3>
                             <p class="featured-text"><em>"How fleeting, how futile is a childhood dream flying away from home?"</em><br> An EP from my former indie-pop/psychedelic band <strong>KODA</strong>. Featuring 5 original tracks, recorded in our rehearsal room and mixed by myself.</p>
@@ -902,7 +976,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row grid-row">
                     <div class="col-sm-6 reveal">
                         <div class="grid-card" style="background-image: url('img/research-bg.jpeg');">
                             <div class="grid-overlay">
@@ -948,7 +1022,7 @@
         </div>
     </div>
 
-    <button id="back-to-top" title="Go to top"><i class="fa fa-chevron-up"></i></button>
+    <button id="back-to-top"><i class="fa fa-chevron-up"></i></button>
 
     <hr>
 
@@ -1021,7 +1095,7 @@
                     </a>
                 </li>
             </ul>
-            <p class="copyright text-muted" style="margin-top: 15px;">Copyright &copy; Tim Ortkamp 2026</p>
+            <p class="copyright text-muted" style="margin-top: 15px; font-size: 8pt; ">Copyright &copy; Tim Ortkamp 2026</p>
         </div>
     </footer>
 
@@ -1035,51 +1109,80 @@
             const nav = document.getElementById('mainNav');
             const btt = document.getElementById('back-to-top');
 
-            // Dark Mode Logic
+            // --- 1. DARK MODE LOGIK ---
             function updateUI(isDark) {
-                if (isDark) { body.classList.add('dark-mode'); icon.className = 'fa fa-sun-o'; }
-                else { body.classList.remove('dark-mode'); icon.className = 'fa fa-moon-o'; }
+                if (isDark) {
+                    body.classList.add('dark-mode');
+                    if(icon) icon.className = 'fa fa-sun-o';
+                } else {
+                    body.classList.remove('dark-mode');
+                    if(icon) icon.className = 'fa fa-moon-o';
+                }
             }
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'light') updateUI(true);
-            toggleBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const isNowDark = !body.classList.contains('dark-mode');
-                updateUI(isNowDark);
-                localStorage.setItem('theme', isNowDark ? 'light' : 'dark');
-            });
 
-            // Scroll Logic (Nav Blur & Back to Top)
-            window.addEventListener('scroll', () => {
+            const getInitialTheme = () => {
+                const savedTheme = localStorage.getItem('theme');
+                // 1. Wenn manuell gespeichert, nimm das
+                if (savedTheme) return savedTheme === 'dark';
+                // 2. Wenn System auf Dark steht, nimm das
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) return true;
+                // 3. Ansonsten: Standardmäßig HELL
+                return false;
+            };
+
+            // Sofort beim Laden anwenden
+            updateUI(getInitialTheme());
+
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const isNowDark = !body.classList.contains('dark-mode');
+                    updateUI(isNowDark);
+                    localStorage.setItem('theme', isNowDark ? 'dark' : 'light');
+                });
+            }
+
+            // --- 2. SCROLL LOGIK (Nav & Back to Top) ---
+            function handleScroll() {
+                // Navbar fixieren/Hintergrund geben
                 if (window.scrollY > 50) {
                     nav.classList.add('is-fixed');
                 } else {
                     nav.classList.remove('is-fixed');
                 }
 
+                // Back-to-Top Button Sichtbarkeit
                 if (window.scrollY > 300) {
                     btt.style.display = "flex";
                 } else {
                     btt.style.display = "none";
                 }
-            });
+            }
 
-            btt.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+            // WICHTIG: Beim Laden prüfen, falls man mitten auf der Seite landet (Reload)
+            handleScroll();
+            window.addEventListener('scroll', handleScroll);
 
-            // Reveal Animation
+            if (btt) {
+                btt.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // --- 3. REVEAL ANIMATION (Intersection Observer) ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        // Element kommt ins Bild -> Fade-In
                         entry.target.classList.add('active');
                     } else {
-                        // Element verlässt das Bild -> Fade-Out (DAS HIER HINZUFÜGEN)
+                        // Optional: Element wieder ausblenden, wenn man wegscrollt
                         entry.target.classList.remove('active');
                     }
                 });
-            }, { threshold: 0.1 }); // Reagiert, sobald 10% des Bildes sichtbar sind
+            }, {
+                threshold: 0.1 // Löst aus, wenn 10% des Elements sichtbar sind
+            });
+
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
     </script>
