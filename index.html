@@ -665,162 +665,133 @@
         /* Subpage Grid */
         /* -------------- */
 
-        /* ==========================================================================
-   DARK MODE STANDARD-ZUSTAND
-   ========================================================================== */
-body.dark-mode .grid-link {
-  background-color: transparent !important;
-  box-shadow: none !important;
-  color: #eeeeee !important;
-}
+        body.dark-mode .grid-link {
+          background-color: transparent !important;
+          box-shadow: none !important;
+          color: #eeeeee !important;
+          }
 
-/* Dark Mode Hover: Text leuchtet in Akzentfarbe auf */
-body.dark-mode .grid-overlay-link:hover .grid-link,
-body.dark-mode .grid-link:hover {
-  color: var(--accent-color) !important;
-}
+        body.dark-mode .grid-overlay-link:hover .grid-link,
+        body.dark-mode .grid-link:hover {
+          color: var(--accent-color) !important;
+          }
 
-body.dark-mode .grid-overlay {
-  background: rgba(0, 0, 0, 0.45);
-}
+        body.dark-mode .grid-overlay {
+          background: rgba(0, 0, 0, 0.45);
+          }
 
+        .grid-card {
+          background-size: cover;
+          background-position: center;
+          border: none;
+          border-radius: 8px;
+          height: 250px;
+          margin-bottom: 10px;
+          overflow: hidden;
+          position: relative;
+          }
 
-/* ==========================================================================
-   KACHEL-BASIS (GRID CARD)
-   ========================================================================== */
-.grid-card {
-  background-size: cover;
-  background-position: center;
-  border: none;
-  border-radius: 8px;
-  height: 250px;
-  margin-bottom: 10px;
-  overflow: hidden;
-  position: relative;
-}
+        .grid-hr {
+          border-top: 1px solid var(--hr-color);
+          margin-bottom: 20px 0;
+          opacity: 1;
+          }
 
-.grid-hr {
-  border-top: 1px solid var(--hr-color);
-  margin-bottom: 20px 0;
-  opacity: 1;
-}
+        .grid-overlay-link {
+          display: block;
+          width: 100%;
+          height: 100%;
+          text-decoration: none !important;
+          }
 
-.grid-overlay-link {
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-decoration: none !important;
-}
+        .grid-overlay {
+          align-items: flex-end;
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0) 100%);
+          display: flex;
+          height: 100%;
+          justify-content: flex-start;
+          left: 0;
+          padding: 25px;
+          position: absolute;
+          top: 0;
+          width: 100%;
+          z-index: 1;
+          }
 
+        .grid-overlay::before {
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.85) 60%, rgba(0, 0, 0, 0.75) 100%);
+          content: '';
+          height: 100%;
+          left: 0;
+          opacity: 0;
+          position: absolute;
+          top: 0;
+          transition: opacity 0.4s ease-in-out;
+          width: 100%;
+          z-index: -1;
+          }
 
-/* ==========================================================================
-   OVERLAY & FADE-EFFECTS (Die Abdunklung)
-   ========================================================================== */
-.grid-overlay {
-  align-items: flex-end;
-  /* Start-Zustand: Angenehmer, dezenter Verlauf für gute Basis-Lesbarkeit */
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0) 100%);
-  display: flex;
-  height: 100%;
-  justify-content: flex-start;
-  left: 0;
-  padding: 25px;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 1;
-}
+        .grid-overlay-link:hover .grid-overlay::before,
+        .grid-card:hover .grid-overlay::before {
+          opacity: 1;
+          }
 
-/* Das unsichtbare, tiefe Hover-Overlay (Vorbereitung für das Fading) */
-.grid-overlay::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* Das tiefe Ziel-Dunkel (deine 85% Abdunklung als Verlauf) */
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.85) 60%, rgba(0, 0, 0, 0.75) 100%);
-  /* Start-Zustand: Vollkommen unsichtbar */
-  opacity: 0;
-  /* Steuert die Geschwindigkeit des samtweichen Fade-In & Fade-Out */
-  transition: opacity 0.4s ease-in-out;
-  z-index: -1; /* Liegt direkt hinter dem Text, aber vor dem Bild */
-}
+        .grid-link {
+          align-items: center;
+          background-color: transparent !important;
+          border: none !important;
+          border-radius: 0;
+          box-shadow: none !important;
+          color: #eeeeee !important;
+          display: inline-flex;
+          font-size: 13pt;
+          font-weight: 700;
+          justify-content: center;
+          letter-spacing: 0.5px;
+          outline: none !important;
+          padding: 0 0 4px 0;
+          position: relative;
+          text-align: center;
+          text-decoration: none !important;
+          transition: color 0.3s ease;
+          width: fit-content;
+          }
 
-/* FADE-IN EFFEKT: Das tiefe Dunkel blendet sich beim Kachel-Hover weich ein */
-.grid-overlay-link:hover .grid-overlay::before,
-.grid-card:hover .grid-overlay::before {
-  opacity: 1;
-}
+        .grid-link::after {
+          background-color: var(--accent-color) !important;
+          bottom: 0;
+          content: '';
+          height: 2px;
+          left: 0;
+          position: absolute;
+          transform: scaleX(0);
+          transform-origin: bottom right;
+          transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+          width: 100%;
+          }
 
+        .grid-overlay-link:hover .grid-link,
+        .grid-link:hover {
+          background-color: transparent !important;
+          box-shadow: none !important;
+          color: var(--accent-color) !important;
+          }
 
-/* ==========================================================================
-   TEXT-FORMATIERUNG & ANIMIERTE UNTERLINIE
-   ========================================================================== */
-.grid-link {
-  align-items: center;
-  background-color: transparent !important; /* Transparenter Text-Look ohne Button-Box */
-  border: none !important;
-  border-radius: 0;
-  box-shadow: none !important;
-  color: #eeeeee !important; /* Gewünschte helle Textfarbe im Normalzustand */
-  display: inline-flex;
-  font-size: 13pt; /* Deine exakte Wunschgröße */
-  font-weight: 700;
-  justify-content: center;
-  letter-spacing: 0.5px;
-  outline: none !important;
-  padding: 0 0 4px 0; /* Schafft 4px Platz nach unten für die Linie */
-  position: relative;
-  text-align: center;
-  text-decoration: none !important;
-  transition: color 0.3s ease; /* Weicher Übergang für das Aufleuchten des Textes */
-  width: fit-content;
-}
+        .grid-overlay-link:hover .grid-link::after,
+        .grid-link:hover::after {
+          transform: scaleX(1);
+          transform-origin: bottom left;
+          }
 
-/* Deine bewährte, farbige Unterlinie (Basis-Zustand: Breite 0) */
-.grid-link::after {
-  background-color: var(--accent-color) !important;
-  bottom: 0;
-  content: '';
-  height: 2px;
-  left: 0;
-  position: absolute;
-  transform: scaleX(0);
-  transform-origin: bottom right;
-  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
-  width: 100%;
-}
+        .grid-row .col-sm-6 {
+          margin-bottom: 20px;
+          padding-left: 10px;
+          padding-right: 10px;
+          }
 
-/* HOVER: Text leuchtet in deiner Akzentfarbe auf */
-.grid-overlay-link:hover .grid-link,
-.grid-link:hover {
-  background-color: transparent !important;
-  box-shadow: none !important;
-  color: var(--accent-color) !important;
-}
-
-/* HOVER: Unterlinie fährt von links nach rechts aus */
-.grid-overlay-link:hover .grid-link::after,
-.grid-link:hover::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
-}
-
-
-/* ==========================================================================
-   BOOTSTRAP LAYOUT & REIHEN-ABSTÄNDE
-   ========================================================================== */
-.grid-row .col-sm-6 {
-  margin-bottom: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.grid-row .col-sm-6:nth-last-child(-n+2) .grid-card {
-  margin-bottom: 0;
-}
+        .grid-row .col-sm-6:nth-last-child(-n+2) .grid-card {
+          margin-bottom: 0;
+          }
 
         /* ------ */
         /* Footer */
