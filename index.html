@@ -34,7 +34,7 @@
         /* ------- */
 
         :root {
-          --accent-color: #111827;
+          --accent-color: #60a5fa;
           --bg-color: #ffffff;
           --bio-color: #4b5563;
           --card-shadow: rgba(0,0,0,0.05);
@@ -44,6 +44,8 @@
           --plain-bright-color: #bcbcbc;
           --plain-dark-color: #111827;
           --text-color: #1a1a1a;
+          --gh-btn-color: #4b5563;
+          --gh-btn-bg-color: #eeeeee;
           }
 
         body.dark-mode {
@@ -57,6 +59,8 @@
           --plain-bright-color: #bcbcbc;
           --plain-dark-color: #bcbcbc;
           --text-color: #eeeeee;
+          --gh-btn-color: #8b949e;
+          --gh-btn-bg-color: #2d2d2d;
           }
 
         body {
@@ -67,6 +71,17 @@
           scroll-behavior: smooth;
           transition: background-color 0.3s ease, color 0.3s ease;
           }
+
+        .phantom-text {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          border: 0;
+        }
 
         /* ----------- */
         /* Back-to-top */
@@ -114,12 +129,13 @@
         .reveal {
           opacity: 0;
           transform: translateY(50px);
-          transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+          transition: opacity 0s, transform 0s;
           }
 
         .reveal.active {
           opacity: 1;
           transform: translateY(0);
+          transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
           }
 
         /* ------- */
@@ -368,7 +384,7 @@
           font-weight: 800;
           letter-spacing: 2px;
           margin-bottom: 10px;
-          opacity: 0.7;
+          opacity: 0.85;
           text-transform: uppercase;
           }
 
@@ -432,6 +448,49 @@
           line-height: 1.6;
           text-align: left;
           }
+
+        .gh-code-block {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border: 1px solid var(--gh-btn-color);
+          border-radius: 6px;
+          padding: 8px 12px;
+          font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+          font-size: 14px;
+          max-width: 100%;
+          margin: 10px 0;
+        }
+
+        .gh-code-block code {
+          color: var(--plain-dark-color);
+          background: transparent !important;
+          padding: 0 !important;
+          border: none !important;
+        }
+
+        .gh-copy-btn {
+          background: none;
+          border: 1px solid var(--gh-btn-color);
+          border-radius: 6px;
+          color: var(--gh-btn-color);
+          cursor: pointer;
+          padding: 5px 8px;
+          display: flex;
+          align-items: center;
+          transition: all 0.2s ease;
+        }
+
+        .gh-copy-btn:hover {
+          color: #2f81f7;
+          background-color: transparent;
+          border-color: #2f81f7;
+        }
+
+        .gh-copy-btn.copied {
+          color: #3fb950 !important;
+          border-color: #3fb950 !important;
+        }
 
         /* ---------------- */
         /* Marginal Columns */
@@ -523,11 +582,17 @@
 
         .marginal-column.reveal {
           opacity: 0;
-          transform: none !important;
+          transform: translateY(50px);
+          transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
           }
 
         .marginal-column.active {
           opacity: 1.0;
+          transform: translateY(0);
+          }
+
+        .marginal-hr {
+          display: none;
           }
 
         .marginal-link {
@@ -591,92 +656,193 @@
           width: 100%;
           }
 
+        .mobile-wrapper {
+          display: none;
+          max-width: 100%;
+          }
+
         /* -------------- */
         /* Subpage Grid */
         /* -------------- */
 
-        body.dark-mode .grid-link {
-          background-color: var(--accent-color, #fbbf24) !important;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-          color: #111111 !important;
-          }
+        /* ==========================================================================
+   DARK MODE STANDARD-ZUSTAND
+   ========================================================================== */
+body.dark-mode .grid-link {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: #eeeeee !important;
+}
 
-        body.dark-mode .grid-link:hover {
-          background-color: var(--accent-color, #fbbf24) !important;
-          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
-          filter: brightness(1.15);
-          }
+/* Dark Mode Hover: Text leuchtet in Akzentfarbe auf */
+body.dark-mode .grid-overlay-link:hover .grid-link,
+body.dark-mode .grid-link:hover {
+  color: var(--accent-color) !important;
+}
 
-        body.dark-mode .grid-overlay {
-          background: rgba(0, 0, 0, 0.45);
-          }
+body.dark-mode .grid-overlay {
+  background: rgba(0, 0, 0, 0.45);
+}
 
-        .grid-card {
-          background-size: cover;
-          background-position: center;
-          border: none;
-          border-radius: 8px;
-          height: 250px;
-          margin-bottom: 10px;
-          overflow: hidden;
-          position: relative;
-          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          }
 
-        .grid-card:hover {
-          transform: scale(1.03);
-          }
+/* ==========================================================================
+   KACHEL-BASIS (GRID CARD)
+   ========================================================================== */
+.grid-card {
+  background-size: cover;
+  background-position: center;
+  border: none;
+  border-radius: 8px;
+  height: 250px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  position: relative;
+}
 
-        .grid-card:hover .grid-overlay {
-          background: rgba(0, 0, 0, 0.1);
-          }
+.grid-hr {
+  border-top: 1px solid var(--hr-color);
+  margin-bottom: 20px 0;
+  opacity: 1;
+}
 
-        .grid-link {
-          background-color: #eeeeee !important;
-          border: none !important;
-          border-radius: 4px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-          color: #111111 !important;
-          display: inline-block;
-          font-size: 0.8em;
-          font-weight: 700;
-          letter-spacing: 1px;
-          outline: none !important;
-          padding: 10px 20px;
-          text-decoration: none !important;
-          text-transform: uppercase;
-          transition: all 0.3s ease;
-          }
+.grid-overlay-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none !important;
+}
 
-        .grid-link:hover {
-          background-color: #f9fafb !important;
-          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-          transform: translateY(-2px);
-          }
 
-        .grid-overlay {
-          align-items: flex-end;
-          background: rgba(0, 0, 0, 0.35);
+/* ==========================================================================
+   OVERLAY & FADE-EFFECTS (Die Abdunklung)
+   ========================================================================== */
+.grid-overlay {
+  align-items: flex-end;
+  /* Start-Zustand: Angenehmer, dezenter Verlauf für gute Basis-Lesbarkeit */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0) 100%);
+  display: flex;
+  height: 100%;
+  justify-content: flex-start;
+  left: 0;
+  padding: 25px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Das unsichtbare, tiefe Hover-Overlay (Vorbereitung für das Fading) */
+.grid-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Das tiefe Ziel-Dunkel (deine 85% Abdunklung als Verlauf) */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.85) 60%, rgba(0, 0, 0, 0.75) 100%);
+  /* Start-Zustand: Vollkommen unsichtbar */
+  opacity: 0;
+  /* Steuert die Geschwindigkeit des samtweichen Fade-In & Fade-Out */
+  transition: opacity 0.4s ease-in-out;
+  z-index: -1; /* Liegt direkt hinter dem Text, aber vor dem Bild */
+}
+
+/* FADE-IN EFFEKT: Das tiefe Dunkel blendet sich beim Kachel-Hover weich ein */
+.grid-overlay-link:hover .grid-overlay::before,
+.grid-card:hover .grid-overlay::before {
+  opacity: 1;
+}
+
+
+/* ==========================================================================
+   TEXT-FORMATIERUNG & ANIMIERTE UNTERLINIE
+   ========================================================================== */
+.grid-link {
+  align-items: center;
+  background-color: transparent !important; /* Transparenter Text-Look ohne Button-Box */
+  border: none !important;
+  border-radius: 0;
+  box-shadow: none !important;
+  color: #eeeeee !important; /* Gewünschte helle Textfarbe im Normalzustand */
+  display: inline-flex;
+  font-size: 13pt; /* Deine exakte Wunschgröße */
+  font-weight: 700;
+  justify-content: center;
+  letter-spacing: 0.5px;
+  outline: none !important;
+  padding: 0 0 4px 0; /* Schafft 4px Platz nach unten für die Linie */
+  position: relative;
+  text-align: center;
+  text-decoration: none !important;
+  transition: color 0.3s ease; /* Weicher Übergang für das Aufleuchten des Textes */
+  width: fit-content;
+}
+
+/* Deine bewährte, farbige Unterlinie (Basis-Zustand: Breite 0) */
+.grid-link::after {
+  background-color: var(--accent-color) !important;
+  bottom: 0;
+  content: '';
+  height: 2px;
+  left: 0;
+  position: absolute;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+  width: 100%;
+}
+
+/* HOVER: Text leuchtet in deiner Akzentfarbe auf */
+.grid-overlay-link:hover .grid-link,
+.grid-link:hover {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: var(--accent-color) !important;
+}
+
+/* HOVER: Unterlinie fährt von links nach rechts aus */
+.grid-overlay-link:hover .grid-link::after,
+.grid-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+
+/* ==========================================================================
+   BOOTSTRAP LAYOUT & REIHEN-ABSTÄNDE
+   ========================================================================== */
+.grid-row .col-sm-6 {
+  margin-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.grid-row .col-sm-6:nth-last-child(-n+2) .grid-card {
+  margin-bottom: 0;
+}
+
+        /* ------ */
+        /* Footer */
+        /* ------ */
+
+        .footer-logos-container {
           display: flex;
-          height: 100%;
-          justify-content: flex-start;
-          left: 0;
-          padding: 25px;
-          position: absolute;
-          top: 0;
-          transition: background 0.3s ease;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          justify-content: center;
+          align-items: center;
+          gap: 15px;
           width: 100%;
+          overflow-x: auto;
           }
 
-        .grid-row .col-sm-6 {
-          margin-bottom: 20px;
-          padding-left: 10px;
-          padding-right: 10px;
-          }
-
-        .grid-row .reveal:last-child .grid-card,
-        .grid-row .reveal:nth-last-child(2) .grid-card {
-          margin-bottom: 0;
+          .footer-logos-container a,
+          .footer-logos-container img,
+          .footer-logos-container svg {
+          flex-shrink: 1;
+          max-width: 32px;
+          height: auto;
           }
 
         /* ----------------- */
@@ -865,6 +1031,10 @@
             padding-left: 0 !important;
             }
 
+          .mobile-hide {
+            display: none !important;
+            }
+
           }
 
         @media (min-width: 992px) {
@@ -899,8 +1069,24 @@
 
         @media (max-width: 1440px) {
 
+          .grid-hr {
+            border-top: 1px solid transparent;
+            margin-bottom: 0px;
+            margin-top: 20px;
+            opacity: 1;
+            }
+
           .marginal-column {
             display: none !important;
+            }
+
+          .marginal-hr {
+            display: block;
+            }
+
+          .mobile-wrapper {
+            display: flex !important;
+            flex-direction: column;
             }
 
           .main-profile-wrapper {
@@ -1070,126 +1256,262 @@
                 </div>
             </section>
 
-            <div class="reveal" style="margin: 0;">
-
-                <div class="row">
-                    <div class="col-xs-12">
-                        <hr style="border-top: 1px solid var(--hr-color); margin-bottom: 20px 0; opacity: 1;">
-                    </div>
+            <div class="row reveal">
+                <div class="col-xs-12">
+                    <hr style="border-top: 1px solid var(--hr-color); margin-bottom: 20px 0; opacity: 1;">
                 </div>
-
-                <div class="row">
-                    <div class="col-md-6 featured-column featured-left">
-                        <h6 class="category-title">Latest Research</h6>
-                        <h3 class="featured-headline">Direct optimization of the probability of lesion origin in proton treatment planning for low-grade glioma patients</h3>
-                        <p class="featured-text">Joint research at the Karlsruhe Institute of Technology (KIT), German Cancer Research Center (DKFZ) and Heidelberg Ion Therapy Center (HIT) on the direct integration of a voxel-based toxicity model into proton treatment plan optimization for low-grade glioma patients.</p>
-                        <a href="https://aapm.onlinelibrary.wiley.com/doi/10.1002/mp.70395" target="_blank" class="featured-link">Read publication →</a>
-                    </div>
-                    <div class="col-md-6 featured-column featured-right">
-                        <h6 class="category-title">Latest Record</h6>
-                        <h3 class="featured-headline">KODA - Transition & Transience (EP, 2016)</h3>
-                        <p class="featured-text"><em>"How fleeting, how futile is a childhood dream flying away from home?"</em><br> An EP from my former indie-pop/psychedelic band <strong>KODA</strong>. Featuring 5 original tracks, recorded in our rehearsal room and mixed by myself.</p>
-                        <a href="https://soundcloud.com/kodamusic/sets/transition-transience" target="_blank" class="featured-link">Listen on SoundCloud →</a>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-12">
-                        <hr style="border-top: 1px solid var(--hr-color); margin-top: 20px 0; opacity: 1;">
-                    </div>
-                </div>
-
-              <h6 class="category-title">Open-Source Python Libraries</h6>
-              <div style="display: flex; gap: 20px; flex-wrap: wrap; margin: 10px 0; ">
-
-                <div style="flex: 1; min-width: 320px; border: 1px solid #333333; border-radius: 10px; overflow: hidden; background: #1a1a1a; display: flex; flex-direction: column;">
-                  <a href="https://github.com/pyanno4rt/pyanno4rt" style="color: #eeeeee; text-decoration: none;">
-                    <div style="display: flex; align-items: center; padding: 15px; background: #252525; border-bottom: 1px solid #333333;">
-                      <img src="img/pyanno4rt.png" alt="pyanno4rt" style="cursor: pointer; height: 80px; width: auto; margin-right: 15px; filter: brightness(1.1);">
-                      <div>
-                        <h3 style="margin: 0; font-size: 13pt;">pyanno4rt</h3>
-                        <p style="margin: 2px 0 0 0; color: #8b949e; font-size: 11pt; line-height: 1.2;">Python-based Advanced Numerical Nonlinear Optimization for Radiotherapy</p>
-                      </div>
-                    </div>
-                  </a>
-                  <div style="padding: 15px; display: flex; gap: 10px; align-items: flex-start;">
-                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                      <img src="https://img.shields.io/github/stars/pyanno4rt/pyanno4rt" alt="Stars" style="height: 20px; width: auto; display: block;">
-                      <img src="https://img.shields.io/github/forks/pyanno4rt/pyanno4rt" alt="Forks" style="height: 20px; width: auto; display: block;">
-                      <img src="https://coveralls.io/repos/github/pyanno4rt/pyanno4rt/badge.svg" alt="Coverage" style="height: 20px; width: auto; display: block;">
-                      <img src="https://img.shields.io/pypi/pyversions/pyanno4rt" alt="Version" style="height: 20px; width: auto; display: block;">
-                      <img src="https://img.shields.io/pypi/dm/pyanno4rt" alt="Downloads" style="height: 20px; width: auto; display: block;">
-                      <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License" style="height: 20px; width: auto; display: block;">
-                    </div>
-                  </div>
-                </div>
-
-                <div style="flex: 1; min-width: 320px; border: 1px solid #333333; border-radius: 10px; overflow: hidden; background: #1a1a1a; display: flex; flex-direction: column;">
-                  <a href="https://github.com/pyanno4rt/seamaze" style="color: #eeeeee; text-decoration: none;">
-                    <div style="display: flex; align-items: center; padding: 15px; background: #252525; border-bottom: 1px solid #333333;">
-                      <img src="img/seamaze.png" alt="seamaze" style="cursor: pointer; height: 80px; width: auto; margin-right: 15px; filter: brightness(1.1);">
-                      <div>
-                        <h3 style="margin: 0; font-size: 13pt;">seamaze</h3>
-                        <p style="margin: 2px 0 0 0; color: #8b949e; font-size: 11pt; line-height: 1.2;">Classical, Limited-Memory, and Dynamical Low-Rank CMA-ES</p>
-                      </div>
-                    </div>
-                  </a>
-                  <div style="padding: 15px; display: flex; gap: 10px; align-items: flex-start;">
-                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                      <img src="https://img.shields.io/github/stars/pyanno4rt/seamaze" alt="Stars" style="height: 20px; width: auto; display: block;">
-                      <img src="https://img.shields.io/github/forks/pyanno4rt/seamaze" alt="Forks" style="height: 20px; width: auto; display: block;">
-                      <img src="https://coveralls.io/repos/github/pyanno4rt/seamaze/badge.svg" alt="Coverage" style="height: 20px; width: auto; display: block;">
-                      <img src="https://img.shields.io/pypi/pyversions/seamaze" alt="Version" style="height: 20px; width: auto; display: block;">
-                      <img src="https://img.shields.io/pypi/dm/seamaze" alt="Downloads" style="height: 20px; width: auto; display: block;">
-                      <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License" style="height: 20px; width: auto; display: block;">
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="row">
-                  <div class="col-xs-12">
-                      <hr style="border-top: 1px solid var(--hr-color); margin-bottom: 20px 0; opacity: 1;">
-                  </div>
-              </div>
-
             </div>
 
-            <h6 class="category-title">Navigation</h6>
-            <div class="row grid-row">
-                <div class="col-sm-6 reveal">
-                    <div class="grid-card" style="background-image: url('img/research-bg.jpeg');">
-                        <div class="grid-overlay">
-                            <a href="./research.html" class="grid-link">Explore Research →</a>
+            <div class="row reveal">
+                <div class="col-md-6 featured-column featured-left reveal">
+                    <h6 class="category-title">Latest Research</h6>
+                    <h3 class="featured-headline">Direct optimization of the probability of lesion origin in proton treatment planning for low-grade glioma patients</h3>
+                    <p class="featured-text">Joint research at the Karlsruhe Institute of Technology (KIT), German Cancer Research Center (DKFZ) and Heidelberg Ion Therapy Center (HIT) on the direct integration of a voxel-based toxicity model into proton treatment plan optimization for low-grade glioma patients.</p>
+                    <a href="https://aapm.onlinelibrary.wiley.com/doi/10.1002/mp.70395" target="_blank" class="featured-link">Read publication →</a>
+                </div>
+                <div class="col-md-6 featured-column featured-right reveal">
+                    <h6 class="category-title">Latest Record</h6>
+                    <h3 class="featured-headline">KODA - Transition & Transience (EP, 2016)</h3>
+                    <p class="featured-text"><em>"How fleeting, how futile is a childhood dream flying away from home?"</em><br> An EP from my former indie-pop/psychedelic band <strong>KODA</strong>. Featuring 5 original tracks, recorded in our rehearsal room and mixed by myself.</p>
+                    <a href="https://soundcloud.com/kodamusic/sets/transition-transience" target="_blank" class="featured-link">Listen on SoundCloud →</a>
+                </div>
+            </div>
+
+            <div class="row reveal">
+                <div class="col-xs-12">
+                    <hr style="border-top: 1px solid transparent; margin-top: 20px 0; opacity: 1;">
+                </div>
+            </div>
+
+            <div class="row reveal">
+                <div class="col-md-6 featured-column featured-left reveal">
+                    <h6 class="category-title">Open-Source Python Libraries</h6>
+                    <h3 class="featured-headline">pyanno4rt</h3>
+                    <p class="featured-text">The main software product of my PhD thesis. Built to support education and research on outcome-based treatment planning in radiation therapy.</p>
+                    <div style="flex: 1; min-width: 320px; border: 1px solid #333333; border-radius: 10px; overflow: hidden; background: #1a1a1a; display: flex; flex-direction: column;">
+                      <a href="https://github.com/pyanno4rt/pyanno4rt" target="_blank" style="color: #eeeeee; text-decoration: none;">
+                        <div style="display: flex; align-items: center; padding: 15px; background: #252525; border-bottom: 1px solid #333333;">
+                          <img src="img/pyanno4rt.png" alt="pyanno4rt" style="cursor: pointer; height: 80px; width: auto; margin-right: 15px; filter: brightness(1.1);">
+                          <div>
+                            <h3 style="margin: 0; font-size: 13pt;">pyanno4rt</h3>
+                            <p style="margin: 2px 0 0 0; color: #8b949e; font-size: 11pt; line-height: 1.2;">Python-based Advanced Numerical Nonlinear Optimization for Radiotherapy</p>
+                          </div>
                         </div>
+                      </a>
+                      <div style="padding: 15px; display: flex; gap: 10px; align-items: flex-start;">
+                        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                          <img src="https://img.shields.io/github/stars/pyanno4rt/pyanno4rt" alt="Stars" style="height: 20px; width: auto; display: block;">
+                          <img src="https://img.shields.io/github/forks/pyanno4rt/pyanno4rt" alt="Forks" style="height: 20px; width: auto; display: block;">
+                          <img src="https://coveralls.io/repos/github/pyanno4rt/pyanno4rt/badge.svg" alt="Coverage" style="height: 20px; width: auto; display: block;">
+                          <img src="https://img.shields.io/pypi/pyversions/pyanno4rt" alt="Version" style="height: 20px; width: auto; display: block;">
+                          <img src="https://img.shields.io/pypi/dm/pyanno4rt" alt="Downloads" style="height: 20px; width: auto; display: block;">
+                          <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License" style="height: 20px; width: auto; display: block;">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="gh-code-block">
+                      <code>pip install pyanno4rt</code>
+                      <button class="gh-copy-btn" onclick="copyCode(this)" aria-label="Copy to clipboard">
+                        <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                          <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1.5a.75.75 0 0 1 0-1.5h1.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0 1 14.25 16H1.75A1.75 1.75 0 0 1 0 14.25Z"></path>
+                          <path d="M5 1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75v1.5A1.75 1.75 0 0 1 9.25 5h-2.5A1.75 1.75 0 0 1 5 3.25Zm1.75-.25a.25.25 0 0 0-.25.25v1.5c0 .138.112.25.25.25h2.5a.25.25 0 0 0 .25-.25v-1.5a.25.25 0 0 0-.25-.25Z"></path>
+                        </svg>
+                      </button>
                     </div>
                 </div>
 
-                <div class="col-sm-6 reveal">
-                    <div class="grid-card" style="background-image: url('img/music-bg.jpg');">
-                        <div class="grid-overlay">
-                            <a href="./music.html" class="grid-link">Listen to Music →</a>
+                <div class="col-md-6 featured-column featured-right reveal">
+                    <h6 class="category-title mobile-hide" style="visibility: hidden;">Placeholder</h6>
+                    <h3 class="featured-headline">seamaze</h3>
+                    <p class="featured-text">A collaborative software project driven by me as the lead developer. Built to deliver state-of-the-art Covariance Matrix Adaptation Evolution Strategy (CMA-ES) algorithms for continuous, nonlinear real-parameter optimization.</p>
+                    <div style="flex: 1; min-width: 320px; border: 1px solid #333333; border-radius: 10px; overflow: hidden; background: #1a1a1a; display: flex; flex-direction: column;">
+                      <a href="https://github.com/pyanno4rt/seamaze" target="_blank" style="color: #eeeeee; text-decoration: none;">
+                        <div style="display: flex; align-items: center; padding: 15px; background: #252525; border-bottom: 1px solid #333333;">
+                          <img src="img/seamaze.png" alt="seamaze" style="cursor: pointer; height: 80px; width: auto; margin-right: 15px; filter: brightness(1.1);">
+                          <div>
+                            <h3 style="margin: 0; font-size: 13pt;">seamaze</h3>
+                            <p style="margin: 2px 0 0 0; color: #8b949e; font-size: 11pt; line-height: 1.2;">Classical, Limited-Memory, and Dynamical Low-Rank CMA-ES</p>
+                          </div>
                         </div>
+                      </a>
+                      <div style="padding: 15px; display: flex; gap: 10px; align-items: flex-start;">
+                        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                          <img src="https://img.shields.io/github/stars/pyanno4rt/seamaze" alt="Stars" style="height: 20px; width: auto; display: block;">
+                          <img src="https://img.shields.io/github/forks/pyanno4rt/seamaze" alt="Forks" style="height: 20px; width: auto; display: block;">
+                          <img src="https://coveralls.io/repos/github/pyanno4rt/seamaze/badge.svg" alt="Coverage" style="height: 20px; width: auto; display: block;">
+                          <img src="https://img.shields.io/pypi/pyversions/seamaze" alt="Version" style="height: 20px; width: auto; display: block;">
+                          <img src="https://img.shields.io/pypi/dm/seamaze" alt="Downloads" style="height: 20px; width: auto; display: block;">
+                          <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License" style="height: 20px; width: auto; display: block;">
+                        </div>
+                      </div>
                     </div>
-                </div>
-
-                <div class="col-sm-6 reveal">
-                    <div class="grid-card" style="background-image: url('img/blog-bg.jpg');">
-                        <div class="grid-overlay">
-                            <a href="blog/blog-head.html" class="grid-link">Read the Blog →</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 reveal">
-                    <div class="grid-card" style="background-image: url('img/contact-bg.jpg');">
-                        <div class="grid-overlay">
-                            <a href="contact.html" class="grid-link">Get in Touch →</a>
-                        </div>
+                    <div class="gh-code-block">
+                      <code>pip install seamaze</code>
+                      <button class="gh-copy-btn" onclick="copyCode(this)" aria-label="Copy to clipboard">
+                        <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                          <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1.5a.75.75 0 0 1 0-1.5h1.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0 1 14.25 16H1.75A1.75 1.75 0 0 1 0 14.25Z"></path>
+                          <path d="M5 1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75v1.5A1.75 1.75 0 0 1 9.25 5h-2.5A1.75 1.75 0 0 1 5 3.25Zm1.75-.25a.25.25 0 0 0-.25.25v1.5c0 .138.112.25.25.25h2.5a.25.25 0 0 0 .25-.25v-1.5a.25.25 0 0 0-.25-.25Z"></path>
+                        </svg>
+                      </button>
                     </div>
                 </div>
             </div>
+
+            <div class="row reveal">
+                <div class="col-xs-12">
+                    <hr class="marginal-hr" style="border-top: 1px solid transparent; margin-bottom: 20px 0; opacity: 1;">
+                </div>
+            </div>
+
+            <div class="marginal-column mobile-wrapper reveal">
+              <div class="marginal-content">
+
+                <h5 class="marginal-title">Short CV</h5>
+                  <div class="marginal-text">
+                    <span class="cv-section-label">Education & Research</span>
+
+                    <div class="cv-item">
+                      <span class="cv-date">2024 & 2026</span>
+                      <strong>Visiting Researcher</strong>
+                      <span class="cv-institution">
+                        Department of Radiation Oncology, Massachusetts General Hospital
+                      </span>
+                    </div>
+
+                    <div class="cv-item">
+                      <span class="cv-date">2021–2026</span>
+                      <strong>PhD Mathematics</strong>
+                      <span class="cv-institution">
+                        Scientific Computing Center, Karlsruhe Institute of Technology & Department of Medical Physics in Radiation Oncology, German Cancer Research Center
+                      </span>
+                    </div>
+
+                    <div class="cv-item">
+                      <span class="cv-date">2018–2021</span>
+                      <strong>M.Sc. Industrial Engineering</strong>
+                      <span class="cv-institution">
+                        Karlsruhe Institute of Technology
+                      </span>
+                    </div>
+
+                    <div class="cv-item">
+                      <span class="cv-date">2014–2018</span>
+                      <strong>B.Sc. Industrial Engineering</strong>
+                      <span class="cv-institution">
+                        Karlsruhe Institute of Technology
+                      </span>
+                    </div>
+
+                    <div class="cv-item">
+                      <span class="cv-date">2006–2014</span>
+                      <strong>Abitur</strong>
+                      <span class="cv-institution">
+                        Viktoriaschule Darmstadt
+                      </span>
+                    </div>
+
+                    <span class="cv-section-label">Professional Experience</span>
+
+                    <div class="cv-item">
+                      <span class="cv-date">2016–2021</span>
+                      <strong>Student Assistant</strong>
+                      <span class="cv-institution">
+                        Institute for Operations Research, Karlsruhe Institute of Technology
+                      </span>
+                    </div>
+
+                    <div class="cv-item">
+                      <span class="cv-date">2019</span>
+                      <strong>Intern in Data Science</strong>
+                      <span class="cv-institution">
+                        Smart Data Analytics / MES & IIoT, Dürr Systems AG
+                      </span>
+                    </div>
+
+                    <div class="cv-item">
+                      <span class="cv-date">2015 & 2017</span>
+                      <strong>Intern in Supply Chain Consulting</strong>
+                      <span class="cv-institution">
+                        Strategy and Concept Planning Department, Miebach Consulting GmbH
+                      </span>
+                    </div>
+
+                    <span class="cv-section-label">Academic Highlights</span>
+                      <ul class="cv-highlights">
+                        <li>7 Theses supervised (B.Sc. & M.Sc.)</li>
+                        <li>6 International conference talks</li>
+                        <li>4 Courses taught (Lecturer & Tutor)</li>
+                        <li>3 Open-source software contributions</li>
+                        <li>2 Research preprints</li>
+                        <li>1 Peer-reviewed journal publication</li>
+                        <li>1 Lecture note</li>
+                        <li>1 Award for teaching excellence</li>
+                      </ul>
+
+                  </div>
+                  <div class="cv-footer">
+                    <a href="short-cv.pdf" target="_blank" class="marginal-link">Short CV (PDF) →</a>
+                  </div>
+              </div>
+            </div>
+
+            <div class="row reveal">
+                <div class="col-xs-12">
+                    <hr class="grid-hr">
+                </div>
+            </div>
+
+            <div class="reveal">
+              <h6 class="category-title">Navigation</h6>
+              <div class="row grid-row">
+
+                  <!-- Kachel 1 -->
+                  <div class="col-sm-6">
+                      <div class="grid-card reveal" style="background-image: url('img/research-bg.jpeg');">
+                          <a href="./research.html" class="grid-overlay-link">
+                              <div class="grid-overlay">
+                                  <span class="grid-link">Explore Research →</span>
+                              </div>
+                          </a>
+                      </div>
+                  </div>
+
+                  <!-- Kachel 2 -->
+                  <div class="col-sm-6">
+                      <div class="grid-card reveal" style="background-image: url('img/music-bg.jpg');">
+                          <a href="./music.html" class="grid-overlay-link">
+                              <div class="grid-overlay">
+                                  <span class="grid-link">Listen to Music →</span>
+                              </div>
+                          </a>
+                      </div>
+                  </div>
+
+                  <!-- Kachel 3 -->
+                  <div class="col-sm-6">
+                      <div class="grid-card reveal" style="background-image: url('img/blog-bg.jpg');">
+                          <a href="blog/blog-head.html" class="grid-overlay-link">
+                              <div class="grid-overlay">
+                                  <span class="grid-link">Read the Blog →</span>
+                              </div>
+                          </a>
+                      </div>
+                  </div>
+
+                  <!-- Kachel 4 -->
+                  <div class="col-sm-6">
+                      <div class="grid-card reveal" style="background-image: url('img/contact-bg.jpg');">
+                          <a href="contact.html" class="grid-overlay-link">
+                              <div class="grid-overlay">
+                                  <span class="grid-link">Get in Touch →</span>
+                              </div>
+                          </a>
+                      </div>
+                  </div>
+
+              </div>
+            </div>
+
         </div>
 
         <div class="marginal-column right-side reveal" id="right-box">
@@ -1207,73 +1529,75 @@
 
   <footer style="background-color: #000000; padding: 20px 0;">
       <div class="container text-center">
-          <ul class="list-inline">
-              <li style="margin-right: -10px; ">
-                  <a target="_blank" href="https://www.linkedin.com/in/tim-ortkamp"
-                     class="link-linkedin tooltip-wrapper"
-                     data-tooltip="LinkedIn">
-                      <span class="fa-stack fa-lg">
-                          <i class="fa fa-circle fa-stack-2x"></i>
-                          <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                      </span>
-                  </a>
-              </li>
+          <div class="footer-logo-container">
+              <ul class="list-inline">
+                  <li>
+                      <a target="_blank" href="https://www.linkedin.com/in/tim-ortkamp"
+                         class="link-linkedin tooltip-wrapper"
+                         data-tooltip="LinkedIn">
+                          <span class="fa-stack fa-lg">
+                              <i class="fa fa-circle fa-stack-2x"></i>
+                              <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                          </span>
+                      </a>
+                  </li>
 
-              <li style="margin-right: -10px; ">
-                  <a target="_blank" href="https://github.com/tortka"
-                     class="link-github tooltip-wrapper"
-                     data-tooltip="GitHub">
-                      <span class="fa-stack fa-lg">
-                          <i class="fa fa-circle fa-stack-2x"></i>
-                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                      </span>
-                  </a>
-              </li>
+                  <li>
+                      <a target="_blank" href="https://github.com/tortka"
+                         class="link-github tooltip-wrapper"
+                         data-tooltip="GitHub">
+                          <span class="fa-stack fa-lg">
+                              <i class="fa fa-circle fa-stack-2x"></i>
+                              <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                          </span>
+                      </a>
+                  </li>
 
-              <li style="margin-right: -10px; ">
-                  <a target="_blank" href="https://orcid.org/0009-0005-6603-3088"
-                     class="link-orcid tooltip-wrapper"
-                     data-tooltip="ORCID">
-                      <span class="fa-stack fa-lg">
-                          <i class="fa fa-circle fa-stack-2x"></i>
-                          <i class="fa fa-graduation-cap fa-stack-1x fa-inverse"></i>
-                      </span>
-                  </a>
-              </li>
+                  <li>
+                      <a target="_blank" href="https://orcid.org/0009-0005-6603-3088"
+                         class="link-orcid tooltip-wrapper"
+                         data-tooltip="ORCID">
+                          <span class="fa-stack fa-lg">
+                              <i class="fa fa-circle fa-stack-2x"></i>
+                              <i class="fa fa-graduation-cap fa-stack-1x fa-inverse"></i>
+                          </span>
+                      </a>
+                  </li>
 
-              <li style="margin-right: -10px; ">
-                  <a target="_blank" href="https://www.researchgate.net/profile/Tim-Ortkamp"
-                     class="link-researchgate tooltip-wrapper"
-                     data-tooltip="ResearchGate">
-                      <span class="fa-stack fa-lg">
-                          <i class="fa fa-circle fa-stack-2x"></i>
-                          <strong class="fa-stack-1x fa-inverse" style="font-family: sans-serif;">R</strong>
-                      </span>
-                  </a>
-              </li>
+                  <li>
+                      <a target="_blank" href="https://www.researchgate.net/profile/Tim-Ortkamp"
+                         class="link-researchgate tooltip-wrapper"
+                         data-tooltip="ResearchGate">
+                          <span class="fa-stack fa-lg">
+                              <i class="fa fa-circle fa-stack-2x"></i>
+                              <strong class="fa-stack-1x fa-inverse" style="font-family: sans-serif;">R</strong>
+                          </span>
+                      </a>
+                  </li>
 
-              <li style="margin-right: -10px; ">
-                  <a target="_blank" href="https://scholar.google.com/citations?user=KL0HYkgAAAAJ&hl=de"
-                     class="link-scholar tooltip-wrapper"
-                     data-tooltip="Google Scholar">
-                      <span class="fa-stack fa-lg">
-                          <i class="fa fa-circle fa-stack-2x"></i>
-                          <i class="fa fa-google fa-stack-1x fa-inverse"></i>
-                      </span>
-                  </a>
-              </li>
+                  <li>
+                      <a target="_blank" href="https://scholar.google.com/citations?user=KL0HYkgAAAAJ&hl=de"
+                         class="link-scholar tooltip-wrapper"
+                         data-tooltip="Google Scholar">
+                          <span class="fa-stack fa-lg">
+                              <i class="fa fa-circle fa-stack-2x"></i>
+                              <i class="fa fa-google fa-stack-1x fa-inverse"></i>
+                          </span>
+                      </a>
+                  </li>
 
-              <li style="margin-right: -10px; ">
-                  <a target="_blank" href="https://soundcloud.com/timnoelofficial"
-                     class="link-soundcloud tooltip-wrapper"
-                     data-tooltip="SoundCloud">
-                      <span class="fa-stack fa-lg">
-                          <i class="fa fa-circle fa-stack-2x"></i>
-                          <i class="fa fa-soundcloud fa-stack-1x fa-inverse"></i>
-                      </span>
-                  </a>
-              </li>
-          </ul>
+                  <li>
+                      <a target="_blank" href="https://soundcloud.com/timnoelofficial"
+                         class="link-soundcloud tooltip-wrapper"
+                         data-tooltip="SoundCloud">
+                          <span class="fa-stack fa-lg">
+                              <i class="fa fa-circle fa-stack-2x"></i>
+                              <i class="fa fa-soundcloud fa-stack-1x fa-inverse"></i>
+                          </span>
+                      </a>
+                  </li>
+              </ul>
+          </div>
           <p class="copyright text-muted" style="margin-top: 15px; font-size: 9pt; ">Copyright &copy; Tim Ortkamp 2026</p>
       </div>
   </footer>
@@ -1288,7 +1612,6 @@
           const nav = document.getElementById('mainNav');
           const btt = document.getElementById('back-to-top');
 
-          // --- 1. DARK MODE LOGIK ---
           function updateUI(isDark) {
               if (isDark) {
                   body.classList.add('dark-mode');
@@ -1301,15 +1624,11 @@
 
           const getInitialTheme = () => {
               const savedTheme = localStorage.getItem('theme');
-              // 1. Wenn manuell gespeichert, nimm das
-              if (savedTheme) return savedTheme === 'dark';
-              // 2. Wenn System auf Dark steht, nimm das
-              if (window.matchMedia('(prefers-color-scheme: dark)').matches) return true;
-              // 3. Ansonsten: Standardmäßig HELL
+              if (savedTheme === 'dark') return true;
+              if (savedTheme === 'light') return false;
               return false;
           };
 
-          // Sofort beim Laden anwenden
           updateUI(getInitialTheme());
 
           if (toggleBtn) {
@@ -1321,16 +1640,14 @@
               });
           }
 
-          // --- 2. SCROLL LOGIK (Nav & Back to Top) ---
           function handleScroll() {
-              // Navbar fixieren/Hintergrund geben
+
               if (window.scrollY > 50) {
                   nav.classList.add('is-fixed');
               } else {
                   nav.classList.remove('is-fixed');
               }
 
-              // Back-to-Top Button Sichtbarkeit
               if (window.scrollY > 300) {
                   btt.style.display = "flex";
               } else {
@@ -1338,7 +1655,6 @@
               }
           }
 
-          // WICHTIG: Beim Laden prüfen, falls man mitten auf der Seite landet (Reload)
           handleScroll();
           window.addEventListener('scroll', handleScroll);
 
@@ -1348,18 +1664,15 @@
               });
           }
 
-          // --- 3. REVEAL ANIMATION (Intersection Observer) ---
           const observer = new IntersectionObserver((entries) => {
               entries.forEach((entry) => {
                   if (entry.isIntersecting) {
                       entry.target.classList.add('active');
-                  } else {
-                      // Optional: Element wieder ausblenden, wenn man wegscrollt
-                      entry.target.classList.remove('active');
+                      observer.unobserve(entry.target);
                   }
               });
           }, {
-              threshold: 0.1 // Löst aus, wenn 10% des Elements sichtbar sind
+              threshold: 0.1
           });
 
           document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
@@ -1404,7 +1717,6 @@
           let fields = [];
           const mouse = { hoverId: null, pendingId: null, lockedId: null, hoverTimer: null, hoverOutTimer: null, releaseTimer: null };
 
-          // Zentrale Funktion um Timer-Konflikte zu lösen
           function clearAllTimers() {
               clearTimeout(mouse.hoverTimer);
               clearTimeout(mouse.hoverOutTimer);
@@ -1554,7 +1866,7 @@
                       mouse.hoverTimer = setTimeout(() => { mouse.hoverId = mouse.pendingId; }, config.hoverDelay);
                   }
               } else {
-                  // Aus einer Box rausbewegen
+
                   if (mouse.pendingId !== null || mouse.hoverId !== null) {
                       clearTimeout(mouse.hoverTimer);
                       mouse.pendingId = null;
@@ -1571,7 +1883,7 @@
           canvas.addEventListener('mousedown', (e) => {
               const rect = canvas.getBoundingClientRect();
               const mx = e.clientX - rect.left;
-              clearAllTimers(); // Sofort alle Verzögerungen stoppen
+              clearAllTimers();
               for (let i = 0; i < 4; i++) {
                   if (mx > fields[i].x && mx < fields[i].x + fields[i].w) {
                       mouse.lockedId = i;
@@ -1619,18 +1931,35 @@
           const navCollapse = document.getElementById('bs-example-navbar-collapse-1');
           const navToggle = document.querySelector('.navbar-toggle');
 
-          // Prüfen, ob das Menü gerade offen ist
-          // Bootstrap fügt die Klasse 'in' (BS3) oder 'show' (BS4/5) hinzu
           const isOpen = navCollapse.classList.contains('in') || navCollapse.classList.contains('show');
 
           if (isOpen) {
-              // Wenn der Klick NICHT innerhalb des Menüs UND NICHT auf dem Button war
               if (!navCollapse.contains(event.target) && !navToggle.contains(event.target)) {
-                  // Klick auf den Toggle-Button simulieren, um das Menü zu schließen
                   navToggle.click();
               }
           }
       });
+  </script>
+  <script>
+      function copyCode(button) {
+
+        const textToCopy = button.previousElementSibling.innerText;
+
+        navigator.clipboard.writeText(textToCopy).then(() => {
+
+          button.classList.add("copied");
+          const originalIcon = button.innerHTML;
+
+          button.innerHTML = `<svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path></svg>`;
+
+          setTimeout(() => {
+            button.classList.remove("copied");
+            button.innerHTML = originalIcon;
+          }, 2000);
+        }).catch(err => {
+          console.error("Error: ", err);
+        });
+      }
   </script>
 
 </body>
