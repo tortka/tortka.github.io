@@ -797,23 +797,27 @@
         /* Footer */
         /* ------ */
 
-        .footer-logos-container {
-          display: flex;
+        .footer-logo-container ul.list-inline {
+          align-items: center;
+          display: flex !important;
           flex-direction: row;
           flex-wrap: nowrap;
+          gap: 10px;
           justify-content: center;
-          align-items: center;
-          gap: 15px;
-          width: 100%;
-          overflow-x: auto;
+          margin: 0;
+          padding: 0;
           }
 
-          .footer-logos-container a,
-          .footer-logos-container img,
-          .footer-logos-container svg {
-          flex-shrink: 1;
-          max-width: 32px;
-          height: auto;
+        .footer-logo-container ul.list-inline li {
+          display: block;
+          flex-shrink: 0;
+          margin: 0 !important;
+          padding: 0 !important;
+          }
+
+        .footer-logo-container a {
+          display: inline-flex;
+          flex-shrink: 0;
           }
 
         /* ----------------- */
@@ -838,6 +842,18 @@
             color: var(--accent-color) !important;
             transform: scale(1.2);
             text-shadow: 0 0 10px var(--accent-color);
+            }
+
+          }
+
+        @media (max-width: 360px) {
+
+          .footer-logo-container ul.list-inline {
+            gap: 8px;
+            }
+
+          .footer-logo-container .fa-stack {
+            font-size: 0.85em;
             }
 
           }
@@ -1436,7 +1452,6 @@
               <h6 class="category-title">Navigation</h6>
               <div class="row grid-row">
 
-                  <!-- Kachel 1 -->
                   <div class="col-sm-6">
                       <div class="grid-card reveal" style="background-image: url('img/research-bg.jpeg');">
                           <a href="./research.html" class="grid-overlay-link">
@@ -1447,7 +1462,6 @@
                       </div>
                   </div>
 
-                  <!-- Kachel 2 -->
                   <div class="col-sm-6">
                       <div class="grid-card reveal" style="background-image: url('img/music-bg.jpg');">
                           <a href="./music.html" class="grid-overlay-link">
@@ -1458,7 +1472,6 @@
                       </div>
                   </div>
 
-                  <!-- Kachel 3 -->
                   <div class="col-sm-6">
                       <div class="grid-card reveal" style="background-image: url('img/blog-bg.jpg');">
                           <a href="blog/blog-head.html" class="grid-overlay-link">
@@ -1469,7 +1482,6 @@
                       </div>
                   </div>
 
-                  <!-- Kachel 4 -->
                   <div class="col-sm-6">
                       <div class="grid-card reveal" style="background-image: url('img/contact-bg.jpg');">
                           <a href="contact.html" class="grid-overlay-link">
