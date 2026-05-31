@@ -81,7 +81,7 @@
           overflow: hidden;
           clip: rect(0, 0, 0, 0);
           border: 0;
-        }
+          }
 
         /* ----------- */
         /* Back-to-top */
@@ -450,47 +450,47 @@
           }
 
         .gh-code-block {
-          display: flex;
           align-items: center;
-          justify-content: space-between;
           border: 1px solid var(--gh-btn-color);
           border-radius: 6px;
-          padding: 8px 12px;
+          display: flex;
           font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
           font-size: 14px;
+          justify-content: space-between;
           max-width: 100%;
           margin: 10px 0;
-        }
+          padding: 8px 12px;
+          }
 
         .gh-code-block code {
-          color: var(--plain-dark-color);
           background: transparent !important;
-          padding: 0 !important;
           border: none !important;
-        }
+          color: var(--plain-dark-color);
+          padding: 0 !important;
+          }
 
         .gh-copy-btn {
+          align-items: center;
           background: none;
           border: 1px solid var(--gh-btn-color);
           border-radius: 6px;
           color: var(--gh-btn-color);
           cursor: pointer;
-          padding: 5px 8px;
           display: flex;
-          align-items: center;
+          padding: 5px 8px;
           transition: all 0.2s ease;
-        }
+          }
 
         .gh-copy-btn:hover {
-          color: #2f81f7;
           background-color: transparent;
           border-color: #2f81f7;
-        }
+          color: #2f81f7;
+          }
 
         .gh-copy-btn.copied {
-          color: #3fb950 !important;
           border-color: #3fb950 !important;
-        }
+          color: #3fb950 !important;
+          }
 
         /* ---------------- */
         /* Marginal Columns */
@@ -507,9 +507,9 @@
           }
 
         .cv-footer {
+          border-top: 1px solid var(--hr-color);
           margin-top: 30px;
           padding-top: 20px;
-          border-top: 1px solid var(--hr-color);
           text-align: center;
           }
 
@@ -659,6 +659,178 @@
         .mobile-wrapper {
           display: none;
           max-width: 100%;
+          }
+
+        /* -------------- */
+        /* Right Marginal */
+        /* -------------- */
+
+        .cover-link {
+          aspect-ratio: 1 / 1;
+          border: 1px solid rgba(255, 255, 255, 0.4);
+          border-radius: 4px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+          box-sizing: border-box;
+          cursor: pointer !important;
+          display: inline-block;
+          flex: 1 1 calc(50% - 8px);
+          overflow: hidden;
+          position: relative;
+          transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease;
+          }
+
+        .cover-overlay {
+          align-items: center;
+          background: rgba(0, 0, 0, 0.7);
+          box-sizing: border-box;
+          cursor: pointer !important;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          justify-content: center;
+          left: 0;
+          opacity: 0;
+          padding: 1rem;
+          position: absolute;
+          text-align: center;
+          top: 0;
+          transform: translateY(6px);
+          transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+          width: 100%;
+          z-index: 2;
+          }
+
+        .cover-link:hover {
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+          transform: translateY(-2px);
+          }
+
+        .cover-link:hover .music-cover {
+          transform: scale(1.04);
+          }
+
+        .cover-link:hover .cover-overlay {
+          opacity: 1;
+          transform: translateY(0);
+          }
+
+        .gallery-btn-bottom {
+          align-items: center;
+          background: var(--accent-color);
+          border: none;
+          border-radius: 50%;
+          color: var(--bg-color);
+          cursor: pointer;
+          display: flex;
+          font-size: 14pt;
+          height: 32px;
+          justify-content: center;
+          transform: scale(1);
+          transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+          width: 32px;
+          }
+
+        .gallery-btn-bottom:hover {
+          opacity: 0.9;
+          transform: scale(1.1);
+          }
+
+        .gallery-controls {
+          align-items: center;
+          background: transparent;
+          display: flex;
+          justify-content: center;
+          margin: 0;
+          padding-bottom: 10px;
+          padding-top: 10px;
+          width: 100%;
+          }
+
+        .gallery-controls-inner {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          width: 140px;
+          }
+
+        .gallery-counter {
+          color: var(--plain-text-color);
+          flex-grow: 1;
+          font-size: 10pt;
+          font-weight: 400;
+          opacity: 1;
+          text-align: center;
+          user-select: none;
+          }
+
+        .gallery-img {
+          grid-area: 1 / 1;
+          height: 100%;
+          object-fit: cover;
+          object-position: bottom;
+          opacity: 0;
+          pointer-events: none;
+          transform: scale(1.15) translateY(-6%);
+          transition: opacity 0.4s ease-in-out;
+          width: 100%;
+          }
+
+        .gallery-img.active {
+          opacity: 1;
+          pointer-events: auto;
+          }
+
+        .gallery-slides {
+          align-items: end;
+          aspect-ratio: 16 / 9;
+          border-radius: 4px;
+          display: grid;
+          grid-template-columns: 1fr;
+          justify-items: center;
+          overflow: hidden;
+          width: 100%;
+          }
+
+        .marginal-covers {
+          display: flex !important;
+          flex-direction: row !important;
+          flex-wrap: nowrap !important;
+          gap: 16px !important;
+          max-width: 500px;
+          width: 100%;
+          }
+
+        .marginal-gallery {
+          margin-bottom: 10px;
+          margin-top: 10px;
+          overflow: hidden;
+          position: relative;
+          width: 100%;
+          }
+
+        .music-cover {
+          aspect-ratio: 1 / 1;
+          cursor: pointer !important;
+          display: block;
+          object-fit: cover;
+          object-position: center;
+          transition: transform 0.3s ease;
+          width: 100%;
+          }
+
+        .music-artist {
+          color: #ffffff;
+          font-size: 11pt;
+          font-weight: 600;
+          letter-spacing: 2px;
+          margin-bottom: 0.4rem;
+          text-transform: uppercase;
+          }
+
+        .music-title {
+          color: rgba(255, 255, 255, 0.9);
+          font-size: 9pt;
+          line-height: 1.3;
           }
 
         /* -------------- */
@@ -1144,10 +1316,10 @@
 
           <h5 class="marginal-title">Short CV</h5>
             <div class="marginal-text">
-              <span class="cv-section-label">Education & Research</span>
+              <span class="cv-section-label">Education &amp; Research</span>
 
               <div class="cv-item">
-                <span class="cv-date">2024 & 2026</span>
+                <span class="cv-date">2024 &amp; 2026</span>
                 <strong>Visiting Researcher</strong>
                 <span class="cv-institution">
                   Department of Radiation Oncology, Massachusetts General Hospital
@@ -1158,7 +1330,7 @@
                 <span class="cv-date">2021–2026</span>
                 <strong>PhD Mathematics</strong>
                 <span class="cv-institution">
-                  Scientific Computing Center, Karlsruhe Institute of Technology & Department of Medical Physics in Radiation Oncology, German Cancer Research Center
+                  Scientific Computing Center, Karlsruhe Institute of Technology &amp; Department of Medical Physics in Radiation Oncology, German Cancer Research Center
                 </span>
               </div>
 
@@ -1200,12 +1372,12 @@
                 <span class="cv-date">2019</span>
                 <strong>Intern in Data Science</strong>
                 <span class="cv-institution">
-                  Smart Data Analytics / MES & IIoT, Dürr Systems AG
+                  Smart Data Analytics / MES &amp; IIoT, Dürr Systems AG
                 </span>
               </div>
 
               <div class="cv-item">
-                <span class="cv-date">2015 & 2017</span>
+                <span class="cv-date">2015 &amp; 2017</span>
                 <strong>Intern in Supply Chain Consulting</strong>
                 <span class="cv-institution">
                   Strategy and Concept Planning Department, Miebach Consulting GmbH
@@ -1214,9 +1386,9 @@
 
               <span class="cv-section-label">Academic Highlights</span>
                 <ul class="cv-highlights">
-                  <li>7 Theses supervised (B.Sc. & M.Sc.)</li>
+                  <li>7 Theses supervised (B.Sc. &amp; M.Sc.)</li>
                   <li>6 International conference talks</li>
-                  <li>4 Courses taught (Lecturer & Tutor)</li>
+                  <li>4 Courses taught (Lecturer &amp; Tutor)</li>
                   <li>3 Open-source software contributions</li>
                   <li>2 Research preprints</li>
                   <li>1 Peer-reviewed journal publication</li>
@@ -1258,7 +1430,7 @@
                 </div>
                 <div class="col-md-6 featured-column featured-right reveal">
                     <h6 class="category-title">Latest Record</h6>
-                    <h3 class="featured-headline">KODA - Transition & Transience (EP, 2016)</h3>
+                    <h3 class="featured-headline">KODA - Transition &amp; Transience (EP, 2016)</h3>
                     <p class="featured-text"><em>"How fleeting, how futile is a childhood dream flying away from home?"</em><br> An EP from my former indie-pop/psychedelic band <strong>KODA</strong>. Featuring 5 original tracks, recorded in our rehearsal room and mixed by myself.</p>
                     <a href="https://soundcloud.com/kodamusic/sets/transition-transience" target="_blank" class="featured-link">Listen on SoundCloud →</a>
                 </div>
@@ -1355,10 +1527,10 @@
 
                 <h5 class="marginal-title">Short CV</h5>
                   <div class="marginal-text">
-                    <span class="cv-section-label">Education & Research</span>
+                    <span class="cv-section-label">Education &amp; Research</span>
 
                     <div class="cv-item">
-                      <span class="cv-date">2024 & 2026</span>
+                      <span class="cv-date">2024 &amp; 2026</span>
                       <strong>Visiting Researcher</strong>
                       <span class="cv-institution">
                         Department of Radiation Oncology, Massachusetts General Hospital
@@ -1369,7 +1541,7 @@
                       <span class="cv-date">2021–2026</span>
                       <strong>PhD Mathematics</strong>
                       <span class="cv-institution">
-                        Scientific Computing Center, Karlsruhe Institute of Technology & Department of Medical Physics in Radiation Oncology, German Cancer Research Center
+                        Scientific Computing Center, Karlsruhe Institute of Technology &amp; Department of Medical Physics in Radiation Oncology, German Cancer Research Center
                       </span>
                     </div>
 
@@ -1411,12 +1583,12 @@
                       <span class="cv-date">2019</span>
                       <strong>Intern in Data Science</strong>
                       <span class="cv-institution">
-                        Smart Data Analytics / MES & IIoT, Dürr Systems AG
+                        Smart Data Analytics / MES &amp; IIoT, Dürr Systems AG
                       </span>
                     </div>
 
                     <div class="cv-item">
-                      <span class="cv-date">2015 & 2017</span>
+                      <span class="cv-date">2015 &amp; 2017</span>
                       <strong>Intern in Supply Chain Consulting</strong>
                       <span class="cv-institution">
                         Strategy and Concept Planning Department, Miebach Consulting GmbH
@@ -1425,9 +1597,9 @@
 
                     <span class="cv-section-label">Academic Highlights</span>
                       <ul class="cv-highlights">
-                        <li>7 Theses supervised (B.Sc. & M.Sc.)</li>
+                        <li>7 Theses supervised (B.Sc. &amp; M.Sc.)</li>
                         <li>6 International conference talks</li>
-                        <li>4 Courses taught (Lecturer & Tutor)</li>
+                        <li>4 Courses taught (Lecturer &amp; Tutor)</li>
                         <li>3 Open-source software contributions</li>
                         <li>2 Research preprints</li>
                         <li>1 Peer-reviewed journal publication</li>
@@ -1439,6 +1611,116 @@
                   <div class="cv-footer">
                     <a href="assets/docs/cv-ortkamp.pdf" target="_blank" class="marginal-link">Short CV (PDF) →</a>
                   </div>
+              </div>
+            </div>
+
+            <div class="marginal-column mobile-wrapper reveal">
+              <div class="marginal-content">
+
+                <h5 class="marginal-title">Music</h5>
+                  <div class="marginal-text">
+
+                    <span class="cv-section-label">Current Project(s)</span>
+
+                    <div class="cv-item">
+                      <span class="cv-date">2025–present</span>
+                      <strong>Album recording</strong>
+                      <span class="cv-institution">
+                        Recording and mixing of 9 songs for the post-punk band <a href="https://www.instagram.com/fatale_hd/" rel="noopener" target="_blank" style="color: var(--plain-text-color);"><i>Fatale</i></a> (Heidelberg, Germany)
+                      </span>
+                    </div>
+
+                    <span class="cv-section-label">Past Releases</span>
+
+                    <div class="marginal-covers" style="margin-top: 0.8rem; margin-bottom: 1.5rem;">
+
+                      <a href="https://soundcloud.com/kodamusic/sets/transition-transience" target="_blank" rel="noopener" class="cover-link">
+                        <img src="./assets/img/transition-and-transience.jpg" alt="Transition &amp; Transience" class="music-cover">
+                        <div class="cover-overlay">
+                          <span class="music-artist">KODA</span>
+                          <span class="music-title">Transition &amp; Transience</span>
+                        </div>
+                      </a>
+
+                      <a href="https://soundcloud.com/kodamusic/sets/blot-on-a-fable" target="_blank" rel="noopener" class="cover-link">
+                        <img src="./assets/img/blot-on-a-fable.jpg" alt="Blot On A Fable" class="music-cover">
+                        <div class="cover-overlay">
+                          <span class="music-artist">KODA</span>
+                          <span class="music-title">Blot On A Fable</span>
+                        </div>
+                      </a>
+
+                    </div>
+
+                    <span class="cv-section-label">Audio &amp; Music Services (Non-commercial)</span>
+                    <ul class="cv-highlights">
+                      <li>Live/Studio recording, audio editing, mixing and post-production</li>
+                      <li>Songwriting &amp; pre-production</li>
+                      <li>Studio tracking for piano, keyboards, and synths</li>
+                    </ul>
+
+                  </div>
+
+                  <div class="cv-footer" style="border-bottom: 1px solid var(--hr-color); margin-bottom: 30px; padding-bottom: 20px;">
+                    <a href="music.html" rel="noopener" class="marginal-link">Listen to Music →</a>
+                  </div>
+
+                  <h5 class="marginal-title">Cycling</h5>
+                    <div class="marginal-text">
+
+                      <span class="cv-section-label">Latest Tour</span>
+
+                      <div class="cv-item">
+                        <span class="cv-date">2025</span>
+                        <strong>Germany, Netherlands &amp; Belgium (21 days | ~1583 km | ~12,000 m vert. )</strong>
+                        <span class="cv-institution">
+                          <div class="marginal-gallery">
+
+                            <div class="gallery-slides">
+                              <img src="assets/img/RT25/RT25-03-2.jpg" alt="RT2025-1" class="gallery-img active">
+                              <img src="assets/img/RT25/RT25-08-5.jpg" alt="RT2025-2" class="gallery-img">
+                              <img src="assets/img/RT25/RT25-08-9.jpg" alt="RT2025-3" class="gallery-img">
+                              <img src="assets/img/RT25/RT25-08-10.jpg" alt="RT2025-4" class="gallery-img">
+                              <img src="assets/img/RT25/RT25-09-10.jpg" alt="RT2025-5" class="gallery-img">
+                              <img src="assets/img/RT25/RT25-10-3.jpg" alt="RT2025-6" class="gallery-img">
+                              <img src="assets/img/RT25/RT25-10-7.jpg" alt="RT2025-7" class="gallery-img">
+                              <img src="assets/img/RT25/RT25-11-6.jpg" alt="RT2025-8" class="gallery-img">
+                              <img src="assets/img/RT25/RT25-12-2.jpg" alt="RT2025-9" class="gallery-img">
+                              <img src="assets/img/RT25/RT25-13-3.jpg" alt="RT2025-10" class="gallery-img">
+                              <img src="assets/img/RT25/RT25-13-4.jpg" alt="RT2025-11" class="gallery-img">
+                              <img src="assets/img/RT25/RT25-14-1.jpg" alt="RT2025-12" class="gallery-img">
+                              <img src="assets/img/RT25/RT25-14-3.jpg" alt="RT2025-13" class="gallery-img">
+                              <img src="assets/img/RT25/RT25-15-1.jpg" alt="RT2025-14" class="gallery-img">
+                              <img src="assets/img/RT25/RT25-16-2.jpg" alt="RT2025-15" class="gallery-img">
+                            </div>
+                            <div class="gallery-controls">
+                              <div class="gallery-controls-inner">
+                                <button class="gallery-btn-bottom prev" onclick="changeSlide(this, -1)">&#10094;</button>
+                                <span class="gallery-counter" id="gallery-counter">1 / 15</span>
+                                <button class="gallery-btn-bottom next" onclick="changeSlide(this, 1)">&#10095;</button>
+                              </div>
+                            </div>
+                          </div>
+                          A round trip from Heidelberg to the Saarland, through the Eifel region all the way to Rotterdam, then via Zeeland to Bruges, and straight across Belgium back to Heidelberg.
+                        </span>
+                      </div>
+
+                      <span class="cv-section-label">Countries Visited</span>
+                      <ul class="cv-highlights">
+                        <li>Belgium</li>
+                        <li>Denmark</li>
+                        <li>Germany</li>
+                        <li>Netherlands</li>
+                        <li>Norway</li>
+                        <li>Sweden</li>
+                        <li>Switzerland</li>
+                      </ul>
+
+                    </div>
+                    <div class="cv-footer">
+                      <a href="blog/blog-head.html" rel="noopener" class="marginal-link">Read the Blog →</a>
+                    </div>
+
               </div>
             </div>
 
@@ -1498,11 +1780,113 @@
         </div>
 
         <div class="marginal-column right-side reveal" id="right-box">
-            <div class="marginal-content">
-                <h5 class="marginal-title">Current Setup</h5>
-                <p class="marginal-text">Ableton Live + Analog Hardware</p>
-                <a href="contact.html" class="marginal-link">Get in touch →</a>
-            </div>
+          <div class="marginal-content">
+
+            <h5 class="marginal-title">Music</h5>
+              <div class="marginal-text">
+
+                <span class="cv-section-label">Current Project(s)</span>
+
+                <div class="cv-item">
+                  <span class="cv-date">2025–present</span>
+                  <strong>Album recording</strong>
+                  <span class="cv-institution">
+                    Recording and mixing of 9 songs for the post-punk band <a href="https://www.instagram.com/fatale_hd/" rel="noopener" target="_blank" style="color: var(--plain-text-color);"><i>Fatale</i></a> (Heidelberg, Germany)
+                  </span>
+                </div>
+
+                <span class="cv-section-label">Past Releases</span>
+
+                <div class="marginal-covers" style="margin-top: 0.8rem; margin-bottom: 1.5rem;">
+
+                  <a href="https://soundcloud.com/kodamusic/sets/transition-transience" target="_blank" rel="noopener" class="cover-link">
+                    <img src="./assets/img/transition-and-transience.jpg" alt="Transition &amp; Transience" class="music-cover">
+                    <div class="cover-overlay">
+                      <span class="music-artist">KODA</span>
+                      <span class="music-title">Transition &amp; Transience</span>
+                    </div>
+                  </a>
+
+                  <a href="https://soundcloud.com/kodamusic/sets/blot-on-a-fable" target="_blank" rel="noopener" class="cover-link">
+                    <img src="./assets/img/blot-on-a-fable.jpg" alt="Blot On A Fable" class="music-cover">
+                    <div class="cover-overlay">
+                      <span class="music-artist">KODA</span>
+                      <span class="music-title">Blot On A Fable</span>
+                    </div>
+                  </a>
+
+                </div>
+
+                <span class="cv-section-label">Audio &amp; Music Services (Non-commercial)</span>
+                <ul class="cv-highlights">
+                  <li>Live/Studio recording, audio editing, mixing and post-production</li>
+                  <li>Songwriting &amp; pre-production</li>
+                  <li>Studio tracking for piano, keyboards, and synths</li>
+                </ul>
+
+              </div>
+
+              <div class="cv-footer" style="border-bottom: 1px solid var(--hr-color); margin-bottom: 30px; padding-bottom: 20px;">
+                <a href="music.html" rel="noopener" class="marginal-link">Listen to Music →</a>
+              </div>
+
+              <h5 class="marginal-title">Cycling</h5>
+                <div class="marginal-text">
+
+                  <span class="cv-section-label">Latest Tour</span>
+
+                  <div class="cv-item">
+                    <span class="cv-date">2025</span>
+                    <strong>Germany, Netherlands &amp; Belgium (21 days | ~1583 km | ~12,000 m vert. )</strong>
+                    <span class="cv-institution">
+                      <div class="marginal-gallery">
+
+                        <div class="gallery-slides">
+                          <img src="assets/img/RT25/RT25-03-2.jpg" alt="RT2025-1" class="gallery-img active">
+                          <img src="assets/img/RT25/RT25-08-5.jpg" alt="RT2025-2" class="gallery-img">
+                          <img src="assets/img/RT25/RT25-08-9.jpg" alt="RT2025-3" class="gallery-img">
+                          <img src="assets/img/RT25/RT25-08-10.jpg" alt="RT2025-4" class="gallery-img">
+                          <img src="assets/img/RT25/RT25-09-10.jpg" alt="RT2025-5" class="gallery-img">
+                          <img src="assets/img/RT25/RT25-10-3.jpg" alt="RT2025-6" class="gallery-img">
+                          <img src="assets/img/RT25/RT25-10-7.jpg" alt="RT2025-7" class="gallery-img">
+                          <img src="assets/img/RT25/RT25-11-6.jpg" alt="RT2025-8" class="gallery-img">
+                          <img src="assets/img/RT25/RT25-12-2.jpg" alt="RT2025-9" class="gallery-img">
+                          <img src="assets/img/RT25/RT25-13-3.jpg" alt="RT2025-10" class="gallery-img">
+                          <img src="assets/img/RT25/RT25-13-4.jpg" alt="RT2025-11" class="gallery-img">
+                          <img src="assets/img/RT25/RT25-14-1.jpg" alt="RT2025-12" class="gallery-img">
+                          <img src="assets/img/RT25/RT25-14-3.jpg" alt="RT2025-13" class="gallery-img">
+                          <img src="assets/img/RT25/RT25-15-1.jpg" alt="RT2025-14" class="gallery-img">
+                          <img src="assets/img/RT25/RT25-16-2.jpg" alt="RT2025-15" class="gallery-img">
+                        </div>
+                        <div class="gallery-controls">
+                          <div class="gallery-controls-inner">
+                            <button class="gallery-btn-bottom prev" onclick="changeSlide(this, -1)">&#10094;</button>
+                            <span class="gallery-counter" id="gallery-counter">1 / 15</span>
+                            <button class="gallery-btn-bottom next" onclick="changeSlide(this, 1)">&#10095;</button>
+                          </div>
+                        </div>
+                      </div>
+                      A round trip from Heidelberg to the Saarland, through the Eifel region all the way to Rotterdam, then via Zeeland to Bruges, and straight across Belgium back to Heidelberg.
+                    </span>
+                  </div>
+
+                  <span class="cv-section-label">Countries Visited</span>
+                  <ul class="cv-highlights">
+                    <li>Belgium</li>
+                    <li>Denmark</li>
+                    <li>Germany</li>
+                    <li>Netherlands</li>
+                    <li>Norway</li>
+                    <li>Sweden</li>
+                    <li>Switzerland</li>
+                  </ul>
+
+                </div>
+                <div class="cv-footer">
+                  <a href="blog/blog-head.html" rel="noopener" class="marginal-link">Read the Blog →</a>
+                </div>
+
+          </div>
         </div>
 
       </div>
@@ -1661,6 +2045,7 @@
           document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
       });
   </script>
+
   <script>
       (function() {
           const canvas = document.getElementById('interactionCanvas');
@@ -1909,6 +2294,7 @@
           initFields(); animate();
       })();
   </script>
+
   <script>
       document.addEventListener('click', function(event) {
           const navCollapse = document.getElementById('bs-example-navbar-collapse-1');
@@ -1923,6 +2309,7 @@
           }
       });
   </script>
+
   <script>
       function copyCode(button) {
 
@@ -1943,6 +2330,42 @@
           console.error("Error: ", err);
         });
       }
+  </script>
+
+  <script>
+    function changeSlide(buttonElement, direction) {
+
+      const currentGallery = buttonElement.closest('.marginal-gallery');
+      if (!currentGallery) return;
+
+      const slides = currentGallery.querySelectorAll('.gallery-img');
+      const counter = currentGallery.querySelector('.gallery-counter');
+
+      if (slides.length === 0) return;
+
+      let currentSlideIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+      if (currentSlideIndex === -1) currentSlideIndex = 0;
+
+      const oldSlide = slides[currentSlideIndex];
+      oldSlide.style.zIndex = "1";
+      oldSlide.classList.remove('active');
+
+      currentSlideIndex += direction;
+      if (currentSlideIndex >= slides.length) {
+        currentSlideIndex = 0;
+      }
+      if (currentSlideIndex < 0) {
+        currentSlideIndex = slides.length - 1;
+      }
+
+      const newSlide = slides[currentSlideIndex];
+      newSlide.style.zIndex = "2";
+      newSlide.classList.add('active');
+
+      if (counter) {
+        counter.textContent = `${currentSlideIndex + 1} / ${slides.length}`;
+      }
+    }
   </script>
 
 </body>
